@@ -1,0 +1,19 @@
+<div class="lp-main-container">
+    <div class="categories">
+        <img src="\bubbles-category\leading-category-yad1.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-real-estate.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-vehicles.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-second-hand.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-drushim-new.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-professional.webp" height="100" alt="Gal2 Logo" />
+        <img src="\bubbles-category\leading-category-business.webp" height="100" alt="Gal2 Logo" />
+    </div>
+    <div class="try">
+        <p-carousel [value]="products" [numVisible]="4" [numScroll]="2" [circular]="true">
+            <ng-template pTemplate="item" let-product>
+                <app-card [item]="product" />
+            </ng-template>
+        </p-carousel>
+    </div>
+
+</div>

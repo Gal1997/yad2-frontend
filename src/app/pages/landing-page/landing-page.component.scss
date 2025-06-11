@@ -1,0 +1,17 @@
+.categories {
+    display: flex;
+    justify-content: center;
+    direction: rtl;
+    gap: 16px;
+}
+
+.try {
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+}
+
+.lp-main-container {}
+
+
+/* in your component stylesheet (e.g. landing-page.component.scss) */

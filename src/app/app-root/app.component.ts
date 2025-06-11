@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppHeaderComponent } from "../cmps/app-header/app-header.component";
-import { BubblesCategoryComponent } from "../cmps/bubbles-category/bubbles-category.component";
+
+import { LandingPageComponent } from "../pages/landing-page/landing-page.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeaderComponent, BubblesCategoryComponent],
+  imports: [RouterOutlet, AppHeaderComponent, LandingPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
