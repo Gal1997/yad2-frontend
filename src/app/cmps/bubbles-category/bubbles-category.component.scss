@@ -1,0 +1,25 @@
+div {
+    display: grid;
+    grid-auto-flow: column;
+    /* lay items out in columns (one row) */
+    //grid-auto-columns: 100px;
+    /* each item is 200px wide */
+    gap: 6px;
+    /* allow horizontal scroll */
+    // padding-bottom: 8px;
+}
+
+.product-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.product-name {
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
