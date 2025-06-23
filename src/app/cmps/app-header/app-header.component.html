@@ -25,9 +25,22 @@
                 fill="currentColor"></path>
         </svg>
 
-        <div class="header-placeholder-userbubble">
-            ג
+        <div class="header-userbubble-loggedin" *ngIf="loggedInUser$ | async as user; else guest">
+            <button (click)="onLogout()" style="all: unset">
+                <span>{{ user.email[0].toUpperCase() }}</span>
+            </button>
         </div>
+
+        <ng-template #guest>
+            <div class="header-userbubble-loggedout" (click)="onLogin()">
+                <svg width="1.6em" height="1.6em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="profile-element_icon__AC2vI">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8 7.5a4.25 4.25 0 118.5 0 4.25 4.25 0 01-8.5 0zm7 0a2.75 2.75 0 10-5.5 0 2.75 2.75 0 005.5 0zm6 9.5a4 4 0 00-4-4H7a4 4 0 000 8h10a4 4 0 004-4zM7 14.5h10l.164.005A2.5 2.5 0 0117 19.5H7l-.164-.005A2.5 2.5 0 017 14.5z"
+                        fill="black"></path>
+                </svg>
+            </div>
+        </ng-template>
 
         <button class="btn-ad">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="none"

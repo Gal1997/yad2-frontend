@@ -16,12 +16,17 @@
 
         span {
             padding: 20px;
-            font-size: 18px;
+            font-size: 16px;
 
         }
     }
 }
 
+@media (max-width: 1200px) {
+    .header-main-container .header-options span {
+        font-size: 12px;
+    }
+}
 
 .header-secondary-container {
     display: flex;
@@ -32,13 +37,29 @@
         opacity: 0.75;
     }
 
-    .header-placeholder-userbubble {
+    .header-userbubble-loggedin {
         display: flex;
+        height: 35px;
+        width: 35px;
+        justify-content: center;
         border: 1px solid #F60;
         color: #F60;
-        padding: 10.5px 17px;
-        border-radius: 25px;
+        //  padding: 10.5px 17px;
+        border-radius: 100%;
         background: rgba(255, 102, 0, 0.05);
+
+    }
+
+    .header-userbubble-loggedout {
+        display: flex;
+        height: 40px;
+        width: 40px;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 5px;
+        border-radius: 100%;
+        border: 1px solid #b5b5b5;
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .btn-ad {

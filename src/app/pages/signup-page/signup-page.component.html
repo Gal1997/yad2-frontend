@@ -1,0 +1,58 @@
+<div class="signup-page-background">
+    <img class="signup-gal2" src="/gal2-logo.png" alt="Gal2 Logo" />
+
+    <div class="signup-main-container" dir="rtl">
+        <h2 class="signup-title">היי, נעים להכיר</h2>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <label class="input-label">מייל</label>
+            <input class="signup-input signup-first" type="email" placeholder="yourmail@email.co.il"
+                formControlName="email" />
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error">
+                כתובת מייל לא תקינה
+            </div>
+
+            <label class="input-label">סיסמה</label>
+            <div class="password-wrapper">
+                <span class="eye-icon" (click)="togglePasswordVisibility()">👁</span>
+                <input class="signup-input" [type]="passwordVisible ? 'text' : 'password'" placeholder="הקלדת סיסמה"
+                    formControlName="password" />
+            </div>
+            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error">
+                חובה להכניס סיסמה
+            </div>
+
+            <label class="input-label">אימות סיסמה</label>
+            <div class="password-wrapper">
+                <span class="eye-icon" (click)="toggleConfirmPasswordVisibility()">👁</span>
+                <input class="signup-input" [type]="confirmPasswordVisible ? 'text' : 'password'"
+                    placeholder="הקלדת סיסמה" formControlName="confirmPassword" />
+            </div>
+            <div *ngIf="signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched"
+                class="error">
+                הסיסמאות לא תואמות
+            </div>
+
+            <button class="signup-button" type="submit">המשך</button>
+        </form>
+        <!-- 
+        <div class="divider">או התחברו דרך</div>
+
+        <div class="social-buttons">
+            <button class="social-btn apple-btn">
+                <img src="assets/icons/apple-logo.svg" alt="Apple" class="social-icon" />
+                אפל
+            </button>
+            <button class="social-btn google-btn">
+                <img src="assets/icons/google-logo.svg" alt="Google" class="social-icon" />
+                גוגל
+            </button>
+        </div> -->
+
+        <p class="signup-text">
+            כבר יש לך חשבון?
+            <a class="signup-link" href="/login">להתחברות</a>
+        </p>
+
+    </div>
+</div>

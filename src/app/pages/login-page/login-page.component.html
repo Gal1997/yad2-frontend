@@ -1,0 +1,34 @@
+<div class="login-page-background">
+    <img class="login-gal2" src="/gal2-logo.png" alt="Gal2 Logo" />
+    <div class="login-main-container" dir="rtl">
+        <h2 class="login-title">היי, טוב לראות אותך</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <label class="input-label">מייל</label>
+            <input class="login-input login-first" type="email" placeholder="yourmail@email.co.il"
+                formControlName="email" />
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">
+                כתובת מייל לא תקינה
+            </div>
+
+            <label class="input-label">סיסמה</label>
+            <div class="password-wrapper">
+                <span class="eye-icon" (click)="togglePasswordVisibility()">👁</span>
+                <input class="login-input" [type]="passwordVisible ? 'text' : 'password'" placeholder="הקלדת סיסמה"
+                    formControlName="password" />
+            </div>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+                חובה להכניס סיסמה
+            </div>
+            <div *ngIf="loginError" class="error">
+                מייל או סיסמה שגויים
+            </div>
+
+            <button class="login-button" type="submit">התחברות</button>
+        </form>
+
+        <p class="signup-text">
+            אין לך חשבון? <a class="signup-link" href="/signup">להרשמה</a>
+        </p>
+    </div>
+</div>

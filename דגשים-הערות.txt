@@ -1,0 +1,2 @@
+Looks like sign in and signup is working
+Just need to redirect now becaues nothing happenes (frontend wise) when we log in /sign up

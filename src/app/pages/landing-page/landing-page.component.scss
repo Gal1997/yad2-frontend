@@ -1,17 +1,33 @@
 .categories {
     display: flex;
     justify-content: center;
+    text-align: center;
     direction: rtl;
-    gap: 16px;
+    gap: 45px;
+    margin: 60px 0px 60px 0px;
+    font-size: 19px;
+
+    img {
+        background-color: #eeeeee;
+        border-radius: 100%;
+        height: 130px;
+        width: 130px;
+        margin-bottom: 10px;
+        transition: background-color 0.2s;
+    }
+
+    img:hover {
+        border: 1px solid rgb(186, 186, 186);
+        background-color: #f8f8f8;
+    }
 }
 
-.try {
+.lp-main-container {
     display: flex;
     flex-direction: column;
     width: 1200px;
+    justify-self: center;
 }
-
-.lp-main-container {}
 
 
 /* in your component stylesheet (e.g. landing-page.component.scss) */

@@ -1,7 +1,7 @@
 <div>
-  <app-header />
-  <div class="page-container">
-    <app-landing-page /> <!-- This will be replaced with something dynamic!!-->
+  <app-header *ngIf="!isAuthPage()" />
+  <div>
+    <router-outlet /> <!-- This will be replaced with something dynamic!!-->
   </div>
   <!--app-footer-->
 </div>
