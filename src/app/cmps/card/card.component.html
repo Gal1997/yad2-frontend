@@ -1,10 +1,10 @@
-<div class="product-item">
+<div class="product-item" (click)="onCardClick(item)">
     <div class="image-wrapper">
-        <img class="item-image" [src]="item.image" alt="Image Unavailable" />
+        <img class="item-image" [src]="item.images[0]" alt="Image Unavailable" />
     </div>
     <div class="item-info">
-        <div>{{ item.price }}</div>
-        <div>{{ item.info1 }}</div>
-        <div>{{ item.info2 }}</div>
+        <div class="house-price">{{ item.price | number }} ₪</div>
+        <div class="house-address">{{ item.street }} {{item.number}}, {{ item.city }}</div>
+        <div class="house-rooms">{{ item.rooms }} חדרים</div>
     </div>
 </div>

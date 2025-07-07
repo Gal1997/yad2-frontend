@@ -71,7 +71,7 @@ export class UserService {
     }
 
     signup(credentials: any): Observable<User> {
-        return this.http.post<User>(BASE_AUTH_URL + 'signup', credentials)
+        return this.http.post<User>(BASE_AUTH_URL + 'signup', credentials, { withCredentials: true })
             .pipe(
                 map((user) => {
                     console.log('Signup returned user:', user);

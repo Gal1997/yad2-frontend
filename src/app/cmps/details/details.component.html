@@ -1,0 +1,53 @@
+<div class="details-container">
+    <div class="details-images">
+        <div class="thumbnails">
+            <img src={{house.images[2]}} alt="Random image">
+            <img src={{house.images[1]}} alt="Random image">
+        </div>
+        <div class="main-media">
+            <img src={{house.images[0]}} alt="Random image">
+        </div>
+    </div>
+
+    <div class="details-bottom-container">
+        <div class="details-left-price">
+            <span class="price">₪ {{house.price|number}}</span>
+            <hr class="divider">
+            <div class="cta">
+                <button *ngIf="!showPhoneNumber" class="btn-primary" (click)="showPhoneNumber = true">הצגת מספר
+                    טלפון</button>
+                <div class="phoneNumber" *ngIf="showPhoneNumber">{{house.phoneNumber}}</div>
+                <button class="btn-secondary">שליחת הודעה</button>
+            </div>
+        </div>
+        <div class="details-right-info">
+            <div class="title">{{house.street}} {{house.number}}</div>
+            <div class="address">{{house.city}}</div>
+            <div class="meta">
+                <span>{{house.rooms}} חדרים</span>
+                <span>קומה 1/1</span>
+                <span>{{house.size}} מ"ר</span>
+            </div>
+            <div class="description">{{house.description}}</div>
+            <hr class="divider">
+            <span class="more-details">פרטים נוספים</span>
+            <!-- listing-meta.component.html -->
+            <div class="listing-meta">
+
+                <div class="meta-label">סוג העסקה</div>
+                <div class="meta-value">מכירה</div>
+                <div class="meta-label">חניות</div>
+                <div class="meta-value">ללא</div>
+
+
+                <div class="meta-label">מחיר למ"ר</div>
+                <div class="meta-value">{{ (house.price/house.size) | number:'1.0-0' }} ₪</div>
+                <div class="meta-label">תאריך כניסה</div>
+                <div class="meta-value">מידית</div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

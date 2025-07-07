@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,13 +16,15 @@ export class SignupComponent {
   passwordVisible = false;
   confirmPasswordVisible = false;
   private userService = inject(UserService)
+  private router = inject(Router)
+  loginErrorMsg: String = "";
 
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required]
+        password: ['', [Validators.required, Validators.minLength(3)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(3)]]
       },
       { validators: this.passwordsMatchValidator }
     );
@@ -48,10 +51,12 @@ export class SignupComponent {
     this.userService.signup(credentials).subscribe({
       next: (user) => {
         console.log('Signup success:', user);
-        // navigate, toast, etc.
+        this.loginErrorMsg = "";
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Signup failed:', err);
+        this.loginErrorMsg = err.error.err;
       }
     });
 

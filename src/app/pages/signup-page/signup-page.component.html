@@ -19,7 +19,12 @@
                     formControlName="password" />
             </div>
             <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error">
-                חובה להכניס סיסמה
+                <ng-container *ngIf="signupForm.get('password')?.errors?.['required']">
+                    חובה להכניס סיסמה
+                </ng-container>
+                <ng-container *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                    סיסמה חייבת להכיל לפחות 3 תווים
+                </ng-container>
             </div>
 
             <label class="input-label">אימות סיסמה</label>
@@ -32,7 +37,9 @@
                 class="error">
                 הסיסמאות לא תואמות
             </div>
-
+            <div *ngIf="loginErrorMsg !== ''" class="error">
+                {{ loginErrorMsg }}
+            </div>
             <button class="signup-button" type="submit">המשך</button>
         </form>
         <!-- 

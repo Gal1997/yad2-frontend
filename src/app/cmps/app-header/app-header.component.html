@@ -1,6 +1,8 @@
 <div class="header-main">
     <div class="header-main-container">
-        <img src="/gal2-logo.png" height="40" alt="Gal2 Logo" />
+        <a routerLink="/">
+            <img src="/gal2-logo.png" height="40" alt="Gal2 Logo" />
+        </a>
         <div class="header-options">
             <span>נדל״ן</span>
             <span>דירות חדשות</span>
@@ -25,14 +27,18 @@
                 fill="currentColor"></path>
         </svg>
 
-        <div class="header-userbubble-loggedin" *ngIf="loggedInUser$ | async as user; else guest">
-            <button (click)="onLogout()" style="all: unset">
+        <div matButton [matMenuTriggerFor]="menu1" class="header-userbubble-loggedin"
+            *ngIf="loggedInUser$ | async as user; else guest">
+            <button style="all: unset">
                 <span>{{ user.email[0].toUpperCase() }}</span>
             </button>
         </div>
+        <mat-menu class="mat-menu-panel" #menu1="matMenu">
+            <button class="mat-menu-item" mat-menu-item (click)="onLogout()">התנתק</button>
+        </mat-menu>
 
         <ng-template #guest>
-            <div class="header-userbubble-loggedout" (click)="onLogin()">
+            <div class="header-userbubble-loggedout" matButton [matMenuTriggerFor]="menu2">
                 <svg width="1.6em" height="1.6em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="profile-element_icon__AC2vI">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -41,6 +47,9 @@
                 </svg>
             </div>
         </ng-template>
+        <mat-menu class="mat-menu-panel" #menu2="matMenu">
+            <button class="mat-menu-item" mat-menu-item (click)="onLogin()">התחבר</button>
+        </mat-menu>
 
         <button class="btn-ad">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="none"

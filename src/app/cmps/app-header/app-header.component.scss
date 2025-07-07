@@ -48,6 +48,11 @@
         border-radius: 100%;
         background: rgba(255, 102, 0, 0.05);
 
+        &:hover {
+            box-shadow: 0 2px 15px rgba(255, 102, 0, 0.25);
+            cursor: pointer;
+        }
+
     }
 
     .header-userbubble-loggedout {
@@ -60,6 +65,12 @@
         border-radius: 100%;
         border: 1px solid #b5b5b5;
         background-color: rgba(0, 0, 0, 0.05);
+
+        &:hover {
+            border-color: rgb(255, 175, 121);
+            background-color: rgba(255, 102, 0, 0.08);
+            cursor: pointer;
+        }
     }
 
     .btn-ad {

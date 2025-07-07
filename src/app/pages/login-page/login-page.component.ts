@@ -19,6 +19,7 @@ export class LoginPageComponent {
 
 
 
+
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,7 +57,7 @@ export class LoginPageComponent {
         },
         error: (error) => {
           // Handle error
-          console.error('Login failed', error);
+          console.error('Login failed', error.error);
           this.loginError = true;
         }
       });

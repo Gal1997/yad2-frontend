@@ -1,14 +1,25 @@
-import { Component, Input } from '@angular/core';
-import Card from '../../models/item'
+import { Component, inject, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { House } from '../../services/house.service';
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
+  private router = inject(Router)
+  @Input() item!: House;
 
-  @Input() item!: Card
 
+
+  onCardClick(house: House) {
+    this.router.navigate(
+      ['/details', house._id],
+      { state: { house } }
+    );
+
+  }
 }

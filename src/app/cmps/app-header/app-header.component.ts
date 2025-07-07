@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-header',
-  imports: [NgIf, AsyncPipe],
+  imports: [NgIf, AsyncPipe, MatMenuModule, MatButtonModule, RouterModule],
   templateUrl: './app-header.component.html',
   styleUrl: './app-header.component.scss'
 })

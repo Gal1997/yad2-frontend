@@ -3,5 +3,30 @@
 
 * {
     margin: 0px;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.mat-menu-panel {
+    position: absolute;
+    background-color: #fff !important;
+    opacity: 0.8 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 6px !important;
+    left: -40px !important;
+    top: 13px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.mat-menu-item {
+    color: #212121 !important;
+    opacity: 1 !important;
+    font-family: 'Rubik', sans-serif !important;
 }
