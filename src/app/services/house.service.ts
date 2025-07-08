@@ -2,21 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import House from '../models/house';
 
-export interface House {
-  _id?: string;
-  ownerId: string;
-  street: string;
-  number: number;
-  city: string;
-  rooms: number;
-  size: number;
-  price: number;
-  phoneNumber: string;
-  datePosted: string;
-  description: string;
-  images: string[];
-}
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from "../../cmps/card/card.component";
 import { HouseService } from '../../services/house.service';
-import { House } from '../../services/house.service';
+import House from '../../models/house';
 
 
 @Component({

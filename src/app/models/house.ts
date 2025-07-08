@@ -11,4 +11,5 @@ export default interface House {
     datePosted: Date;
     description?: string;
     images: string[];
+    type: string;
 }

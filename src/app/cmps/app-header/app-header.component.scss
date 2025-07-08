@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 10px 25px 10px 5px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
     direction: rtl;
 }
 
@@ -78,7 +79,7 @@
         align-items: center;
         gap: 8px;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         padding: 10px 18px;
         color: #F60;
         background: none;

@@ -1,0 +1,125 @@
+.index-main {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    direction: rtl;
+    flex-direction: column;
+
+    span {
+        font-size: 24px;
+        opacity: 0.8;
+        margin-top: 70px;
+
+    }
+}
+
+
+.cards-container {
+    display: flex;
+    gap: 25px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.category-card {
+    width: 320px;
+    max-height: 180px;
+    min-height: 180px;
+    padding: 10px 0px 40px 0px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    .icon-active {
+        display: none;
+    }
+
+    .category-button {
+        display: none;
+    }
+
+    &:hover {
+        .icon-default {
+            display: none;
+        }
+
+        .icon-active {
+            display: block;
+        }
+
+        .category-subtitle {
+            display: none;
+        }
+
+        .category-button {
+            display: inline-block;
+        }
+    }
+
+    .category-icon {
+        width: 120px; // ↑ up from 64
+        height: 120px; // ↑ up from 64
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+
+    .category-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #222;
+    }
+
+    .category-subtitle {
+        margin: 0;
+        font-size: 0.975rem;
+        color: #777;
+        text-align: center;
+        opacity: 0.75;
+    }
+
+    .category-button {
+        padding: 10px 28px;
+        margin-top: 5px;
+        font-size: 0.875rem;
+        border: none;
+        border-radius: 150px;
+        background-color: #ff7100;
+        color: #fff;
+        cursor: pointer;
+    }
+
+
+}
+
+.special-card {
+    position: relative; // for the ::before positioning
+    border: 1px solid #0fca80;
+}
+
+.special-card::before {
+    content: "יש לכם פריט מיותר? תרוויחו עליו כסף!";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0fca80;
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 122px;
+    font-size: 15.5px;
+    font-weight: 600;
+    white-space: nowrap;
+
+}

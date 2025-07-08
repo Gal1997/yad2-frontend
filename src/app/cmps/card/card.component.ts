@@ -1,7 +1,8 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { House } from '../../services/house.service';
+import House from '../../models/house';
+
 
 @Component({
   selector: 'app-card',
