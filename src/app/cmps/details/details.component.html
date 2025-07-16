@@ -25,13 +25,12 @@
             <div class="address">{{house.type}}, {{house.city}}</div>
             <div class="meta">
                 <span>{{house.rooms}} חדרים</span>
-                <span>קומה 1/1</span>
+                <span>קומה {{house.floor}}/{{house.totalFloors}}</span>
                 <span>{{house.size}} מ"ר</span>
             </div>
             <div class="description">{{house.description}}</div>
             <hr class="divider">
             <span class="more-details">פרטים נוספים</span>
-            <!-- listing-meta.component.html -->
             <div class="listing-meta">
 
                 <div class="meta-label">סוג העסקה</div>

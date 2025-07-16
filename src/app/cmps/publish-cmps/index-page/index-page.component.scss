@@ -24,9 +24,9 @@
 
 .category-card {
     width: 320px;
-    max-height: 180px;
-    min-height: 180px;
-    padding: 10px 0px 40px 0px;
+    max-height: 220px;
+    min-height: 220px;
+    // padding: 10px 0px 40px 0px;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
@@ -58,13 +58,13 @@
         }
 
         .category-button {
-            display: inline-block;
+            display: block;
         }
     }
 
     .category-icon {
-        width: 120px; // ↑ up from 64
-        height: 120px; // ↑ up from 64
+        width: 120px;
+        height: 120px;
 
         img {
             width: 100%;

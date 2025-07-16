@@ -3,9 +3,12 @@
     justify-content: space-between;
     padding: 10px 25px 10px 5px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+    position: relative;
+    overflow: visible;
     direction: rtl;
+    white-space: nowrap;
 }
+
 
 
 .header-main-container {
@@ -62,7 +65,6 @@
         width: 40px;
         justify-content: center;
         align-items: center;
-        padding: 5px 5px;
         border-radius: 100%;
         border: 1px solid #b5b5b5;
         background-color: rgba(0, 0, 0, 0.05);

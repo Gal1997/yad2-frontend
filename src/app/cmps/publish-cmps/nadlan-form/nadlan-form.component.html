@@ -1,0 +1,243 @@
+<div class="nadlan-form-main-container">
+    <div class="nadlan-form-step" [class.active]="activeStep === 1">
+        <span class="step-number">1</span>
+        <span class="step-title">
+            אני רוצה למכור נכס
+        </span>
+    </div>
+    <div class="nadlan-form-step" [class.active]="activeStep === 2">
+        <span class="step-number">2</span>
+        <span class="step-title">
+            כתובת הנכס
+        </span>
+
+        <form [formGroup]="step2Form" (ngSubmit)="onSubmitStep2()" class="address-form">
+            <p class="form-top-note">סימנו עבורך את שדות החובה, שלא נפספס פרט חשוב</p>
+            <div class="form-row">
+                <label for="propertyType">סוג הנכס*</label>
+                <select id="propertyType" formControlName="propertyType">
+                    <option value="" disabled selected hidden> דירה או אולי פנטהאוז?
+                    </option>
+                    <option value="דירה">דירה</option>
+                    <option value="יחידת דיור">יחידת דיור</option>
+                    <option value="מגרשים">מגרשים</option>
+                    <option value="בית פרטי">בית פרטי</option>
+                    <option value="בית פרטי">דירת גן</option>
+                </select>
+                <div class="error" *ngIf="propertyType.touched && propertyType.invalid">
+                    <div *ngIf="propertyType.hasError('required')">אנא בחר סוג נכס</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="neighborhood">ישוב*</label>
+                <input id="neighborhood" formControlName="city" placeholder="איפה נמצא הנכס?" />
+                <div class="error" *ngIf="city.touched && city.invalid">
+                    <div *ngIf="city.hasError('required')">יש למלא את הישוב</div>
+                    <div *ngIf="city.hasError('minlength')">
+                        שם הישוב חייב להכיל לפחות {{ city.getError('minlength').requiredLength }} תווים
+                    </div>
+                </div>
+            </div>
+
+            <!-- street + help‐link -->
+            <div class="form-row">
+                <label for="street">רחוב*</label>
+
+                <input id="street" formControlName="street" placeholder="הכנס שם הרחוב" />
+                <div class="error" *ngIf="street.touched && street.invalid">
+                    <div *ngIf="street.hasError('required')">יש למלא את הרחוב</div>
+                    <div *ngIf="street.hasError('minlength')">
+                        שם הרחוב חייב להכיל לפחות {{ street.getError('minlength').requiredLength }} תווים
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="houseNumber">מס' בית*</label>
+                <input id="houseNumber" formControlName="houseNumber" />
+                <div class="error" *ngIf="houseNumber.touched && houseNumber.invalid">
+                    <div *ngIf="houseNumber.hasError('required')">יש למלא את מספר הבית</div>
+                    <div *ngIf="houseNumber.hasError('pattern')">מספר בית חייב להיות מספר שלם חיובי</div>
+                </div>
+            </div>
+            <div class="form-row form-how-many-floors">
+                <div>
+                    <label for="floor">קומה*</label>
+                    <input id="floor" formControlName="floor" />
+                    <div class="error" *ngIf="floor.touched && floor.invalid">
+                        <div *ngIf="floor.hasError('required')">יש למלא את הקומה</div>
+                        <div *ngIf="floor.hasError('pattern')">קומה חייבת להיות מספר חיובי</div>
+                        <div *ngIf="floor.hasError('min')">קומה לא יכולה להיות פחות מ-1</div>
+                    </div>
+                    <!-- cross‐field error -->
+                    <div class="error" *ngIf="step2Form.hasError('floorExceedsTotal') 
+            && (floor.touched && totalFloors.touched)">
+                        גדול ממספר הקומות בבניין...
+                    </div>
+                </div>
+                <div>
+                    <label for="totalFloors">סה"כ קומות בבניין*</label>
+                    <input id="totalFloors" formControlName="totalFloors" />
+
+                    <!-- control‐level errors -->
+                    <div class="error" *ngIf="totalFloors.touched && totalFloors.invalid">
+                        <div *ngIf="totalFloors.hasError('required')">
+                            יש למלא סה"כ קומות
+                        </div>
+                        <div *ngIf="totalFloors.hasError('pattern')">
+                            חייב להיות מספר חיובי
+                        </div>
+                        <div *ngIf="totalFloors.hasError('min')">
+                            חייב להיות לפחות קומה 1
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="nadlan-form-step" [class.active]="activeStep === 3">
+        <span class="step-number">3</span>
+        <span class="step-title">על הנכס</span>
+        <form [formGroup]="step3Form" (ngSubmit)="onSubmitStep3()" class="address-form">
+            <div class="form-row">
+                <label for="rooms">מספר חדרים*</label>
+                <select id="rooms" formControlName="rooms">
+                    <option value="" disabled selected hidden> בחירת מספר חדרים
+                    </option>
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4">4</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5">5</option>
+                    <option value="5.5">5.5</option>
+                    <option value="6">6</option>
+                    <option value="6.5">6.5</option>
+                    <option value="7">7</option>
+                    <option value="7.5">7.5</option>
+                    <option value="8">8</option>
+                    <option value="8.5">8.5</option>
+                    <option value="9">9</option>
+                    <option value="9.5">9.5</option>
+                    <option value="10">10</option>
+                    <option value="10.5">10.5</option>
+
+                </select>
+                <div class="error" *ngIf="rooms.touched && rooms.invalid">
+                    <div *ngIf="rooms.hasError('required')">אנא בחר מספר חדרים</div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <p style="font-weight: 500;margin-top: 40px;">מה חשוב לך שידעו על הנכס?</p>
+
+                <label for="description">
+                    <div>
+                        <p style="margin-top: 15px; font-size: 14px; font-weight: 550;">פרוט הנכס</p>
+                        <p style="font-size: 14px; font-weight: 400;">הידעת: מודעה ללא תיאור, כמעט ולא מקבלת שיחות</p>
+                    </div>
+                </label>
+                <textarea id="description" formControlName="description"
+                    placeholder="זה המקום לתאר את הפרטים הבולטים, למשל, האם נערך שיפוץ במבנה, מה שופץ, כיווני אוויר, האווירה ברחוב וכו'"></textarea>
+                <div class="error" *ngIf="description.touched && description.invalid">
+                    <div *ngIf="description.hasError('required')">שכחת להוסיף תיאור!</div>
+                </div>
+                <p style="font-size: 12px;">אין צורך להוסיף מספר טלפון כחלק מהתיאור, בהמשך התהליך יש אזור מסודר לזה</p>
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="nadlan-form-step" [class.active]="activeStep === 4">
+        <span class="step-number">4</span>
+        <span class="step-title">תשלומים, תאריכים ועוד</span>
+        <form [formGroup]="step4Form" (ngSubmit)="onSubmitStep4()" class="address-form">
+            <div class="form-row">
+                <label for="size">מ״ר בנוי</label>
+                <input id="size" formControlName="size" placeholder="כמה מ״ר יש בנכס" />
+                <div class="error" *ngIf="size.touched && size.invalid">
+                    <div *ngIf="size.hasError('required')">שדה חובה</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="price">מחיר</label>
+
+                <div class="currency-input">
+                    <span class="currency-prefix">₪</span>
+                    <input id="price" formControlName="price" placeholder="סכום מינימלי 10,000" maxlength="10"
+                        appThousandSeparator />
+                </div>
+
+                <div class="error" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.hasError('required')">שדה חובה</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label style="opacity: 0.35;">מחיר למטר</label>
+                <div class="currency-input">
+                    <span class="currency-prefix">₪</span>
+                    <input
+                        style="cursor: not-allowed;background-color: rgba(0,0,0,0.05);border: 1px solid rgba(0,0,0,0.4);color: rgba(0,0,0,0.8);"
+                        [value]="pricePerSqm | number:'1.2-2'" disabled />
+                </div>
+
+            </div>
+            <div class="form-row">
+                <label for="price">תאריך כניסה</label>
+
+                <div>
+                    <input type="date" style="width: 193px; text-align: end;" [value]="today" />
+                    <label class="checkbox-label">
+                        <input type="checkbox" disabled />
+                        <span style="opacity: 0.6;">מיידי</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" disabled />
+                        <span style="opacity: 0.6;">גמיש</span>
+                    </label>
+                </div>
+
+            </div>
+
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="nadlan-form-step" [class.active]="activeStep === 5">
+        <span class="step-number">5</span>
+        <span class="step-title">תמונות וסרטונים</span>
+    </div>
+</div>

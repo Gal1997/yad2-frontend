@@ -12,4 +12,6 @@ export default interface House {
     description?: string;
     images: string[];
     type: string;
+    floor: number;
+    totalFloors: number;
 }
