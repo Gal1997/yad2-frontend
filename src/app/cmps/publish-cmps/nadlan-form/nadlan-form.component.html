@@ -1,15 +1,35 @@
 <div class="nadlan-form-main-container">
     <div class="nadlan-form-step" [class.active]="activeStep === 1">
-        <span class="step-number">1</span>
-        <span class="step-title">
-            אני רוצה למכור נכס
-        </span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=1">1</span>
+            <div class="success-icon" *ngIf="activeStep>1">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L19 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                אני רוצה למכור נכס
+            </span>
+        </div>
     </div>
     <div class="nadlan-form-step" [class.active]="activeStep === 2">
-        <span class="step-number">2</span>
-        <span class="step-title">
-            כתובת הנכס
-        </span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=2">2</span>
+            <div class="success-icon" *ngIf="activeStep>2">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                כתובת הנכס
+            </span>
+        </div>
 
         <form [formGroup]="step2Form" (ngSubmit)="onSubmitStep2()" class="address-form">
             <p class="form-top-note">סימנו עבורך את שדות החובה, שלא נפספס פרט חשוב</p>
@@ -109,8 +129,18 @@
         </form>
     </div>
     <div class="nadlan-form-step" [class.active]="activeStep === 3">
-        <span class="step-number">3</span>
-        <span class="step-title">על הנכס</span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=3">3</span>
+            <div class="success-icon" *ngIf="activeStep>3">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">על הנכס</span>
+        </div>
         <form [formGroup]="step3Form" (ngSubmit)="onSubmitStep3()" class="address-form">
             <div class="form-row">
                 <label for="rooms">מספר חדרים*</label>
@@ -174,8 +204,18 @@
         </form>
     </div>
     <div class="nadlan-form-step" [class.active]="activeStep === 4">
-        <span class="step-number">4</span>
-        <span class="step-title">תשלומים, תאריכים ועוד</span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=4">4</span>
+            <div class="success-icon" *ngIf="activeStep>4">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">תשלומים, תאריכים ועוד</span>
+        </div>
         <form [formGroup]="step4Form" (ngSubmit)="onSubmitStep4()" class="address-form">
             <div class="form-row">
                 <label for="size">מ״ר בנוי</label>
@@ -237,8 +277,18 @@
         </form>
     </div>
     <div class="nadlan-form-step" [class.active]="activeStep === 5">
-        <span class="step-number">5</span>
-        <span class="step-title">תמונות וסרטונים</span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=5">5</span>
+            <div class="success-icon" *ngIf="activeStep>5">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">תמונות וסרטונים</span>
+        </div>
         <div class="pictures-section">
             <div class="pictures-info">ניתן להעלות עד 3 תמונות (כי אין לי כסף לאחסון גדול 😊) אחרי הבחירה, בחרו את
                 מרכז התמונה כדי שתופיע
@@ -281,11 +331,20 @@
     </div>
 
     <div class="nadlan-form-step" [class.active]="activeStep === 6">
-        <span class="step-number">6</span>
-        <span class="step-title">
-            פרטי התקשרות
-        </span>
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=6">6</span>
+            <div class="success-icon" *ngIf="activeStep>6">
 
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                פרטי התקשרות
+            </span>
+        </div>
         <form [formGroup]="step6Form" (ngSubmit)="onSubmitStep6()" class="address-form">
             <div class="form-row">
                 <label for="name">השם שלך*</label>
