@@ -31,6 +31,10 @@
             color: #0fca80;
             border: 2px solid #0fca80;
         }
+
+        .step-title {
+            font-size: 24px;
+        }
     }
 }
 
@@ -159,9 +163,19 @@ select option.placeholder-option {
     display: none;
 }
 
+.nadlan-form-step .pictures-section {
+    display: none;
+}
+
+
 .nadlan-form-step.active .address-form {
     display: block;
 }
+
+.nadlan-form-step.active .pictures-section {
+    display: block;
+}
+
 
 
 textarea {
@@ -206,5 +220,30 @@ textarea {
     align-items: center;
     gap: 5px;
     margin-right: 20px;
+
+}
+
+
+.images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    ;
+}
+
+.pictures-info {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 15px;
+
 
 }

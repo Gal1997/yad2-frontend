@@ -239,5 +239,81 @@
     <div class="nadlan-form-step" [class.active]="activeStep === 5">
         <span class="step-number">5</span>
         <span class="step-title">תמונות וסרטונים</span>
+        <div class="pictures-section">
+            <div class="pictures-info">ניתן להעלות עד 3 תמונות (כי אין לי כסף לאחסון גדול 😊) אחרי הבחירה, בחרו את
+                מרכז התמונה כדי שתופיע
+                באתר בצורה המוקטנת הטובה ביותר. <br />
+                אין לכם מה לדאוג, בגלריה התמונה תופיע בגודלה המקורי</div>
+            <uc-config #ucConfig ctx-name="my-uploader" source-list="local,url" pubkey="6e6d7483b35fc62822d6"
+                multiple="true" removeCopyright="true" multiple-max="3"> <!-- ← limit to 3 files -->></uc-config>
+
+            <uc-upload-ctx-provider ctx-name="my-uploader"
+                (common-upload-success)="onAllUploaded($any($event).detail.successEntries)"
+                (change)="onCollectionChanged($any($event).detail)">
+            </uc-upload-ctx-provider>
+
+            <uc-file-uploader-regular ctx-name="my-uploader" class="uc-light uc-gray">
+            </uc-file-uploader-regular>
+
+            <!-- error message, shown 1× when you try to submit with zero files -->
+            <div class="error" *ngIf="showUploadError" style="margin-top:8px;">
+                אנא העלה לפחות תמונה אחת
+            </div>
+
+            <div *ngIf="uploadedUrls.length > 0" style="margin-top: 20px;">
+                תצוגה מקדימה
+            </div>
+            <div class="images-preview">
+
+                <img *ngFor="let url of uploadedUrls" [src]="url" class="preview-image" />
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="button" (click)="onSubmitStep5()" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="nadlan-form-step" [class.active]="activeStep === 6">
+        <span class="step-number">6</span>
+        <span class="step-title">
+            פרטי התקשרות
+        </span>
+
+        <form [formGroup]="step6Form" (ngSubmit)="onSubmitStep6()" class="address-form">
+            <div class="form-row">
+                <label for="name">השם שלך*</label>
+                <input id="name" formControlName="name" />
+                <div class="error" *ngIf="name.touched && name.invalid">
+                    <div *ngIf="name.hasError('required')">שדה חובה</div>
+                    <div *ngIf="name.hasError('pattern') || name.hasError('minlength')">לא תקין</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="phone">טלפון*</label>
+                <input id="phone" formControlName="phone" />
+                <div class="error" *ngIf="phone.touched && phone.invalid">
+                    <div *ngIf="phone.hasError('required')">שדה חובה</div>
+                    <div *ngIf="phone.hasError('pattern')">לא תקין</div>
+                </div>
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step" style="font-weight: 900 !important;font-size: 16px;">
+                    פרסם !
+                </button>
+
+            </div>
+        </form>
     </div>
 </div>
