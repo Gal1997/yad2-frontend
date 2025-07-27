@@ -29,5 +29,16 @@
     justify-self: center;
 }
 
+.category_title {
+    direction: rtl;
+    font-weight: 500;
+    font-size: 20px;
+    opacity: 0.82;
+    padding: 0px 25px 20px 0px;
+}
 
-/* in your component stylesheet (e.g. landing-page.component.scss) */
+.carousels-container {
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+}

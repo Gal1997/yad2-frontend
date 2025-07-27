@@ -9,6 +9,9 @@ import { ThousandSeparatorDirective } from '../../../shared/directives/thousand-
 import House from '../../../models/house';
 import { UserService } from '../../../services/user.service';
 import { HouseService } from '../../../services/house.service';
+import { VehicleService } from '../../../services/vehicle.service';
+import { Router } from '@angular/router';
+
 
 // register the Uploadcare custom elements
 UC.defineComponents(UC);
@@ -26,6 +29,7 @@ export class NadlanFormComponent implements AfterViewInit {
 
   private houseService = inject(HouseService)
   private userService = inject(UserService)
+  private router = inject(Router)
 
   uploadedUrls: string[] = [];
   showUploadError = false;
@@ -129,8 +133,6 @@ export class NadlanFormComponent implements AfterViewInit {
   }
 
 
-
-
   // getters for template
   get propertyType() { return this.step2Form.get('propertyType')!; }
   get city() { return this.step2Form.get('city')!; }
@@ -231,7 +233,7 @@ export class NadlanFormComponent implements AfterViewInit {
           rooms: +this.step3Form.value.rooms,
           size: +this.step4Form.value.size,
           price: +this.step4Form.value.price,
-          phoneNumber: this.step6Form.value.phoneNumber,
+          phoneNumber: this.step6Form.value.phone,
           datePosted: new Date(),
           description: this.step3Form.value.description,
           images: this.uploadedUrls,
@@ -247,6 +249,10 @@ export class NadlanFormComponent implements AfterViewInit {
           error: err => {
             console.error('Failed to create house', err);
           }
+        });
+
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
         });
 
       }

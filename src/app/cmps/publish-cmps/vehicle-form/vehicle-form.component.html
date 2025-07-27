@@ -1,0 +1,412 @@
+<div class="vehicle-form-main-container">
+    <div class="vehicle-form-step" [class.active]="activeStep === 1">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=1">1</span>
+            <div class="success-icon" *ngIf="activeStep>1">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L19 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                מה נפרסם היום?
+            </span>
+        </div>
+    </div>
+    <div class="vehicle-form-step" [class.active]="activeStep === 2">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=2">2</span>
+            <div class="success-icon" *ngIf="activeStep>2">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                סוג הרכב
+            </span>
+        </div>
+
+        <form [formGroup]="step2Form" (ngSubmit)="onSubmitStep2()" class="address-form">
+            <div class="form-row">
+                <label style="margin-bottom: 5px;font-weight: 300;" for="plateInput">ניתן להזין מספר
+                    רכב
+                    לקיצור
+                    התהליך</label>
+                <div style="margin-bottom: 20px;">
+                    <input type="number" id="plateInput" #plateInput placeholder="מספר רכב"
+                        (blur)="searchByPlate(plateInput.value)" />
+                    <button type="button" class="search-btn" (click)="searchByPlate(plateInput.value)">חיפוש</button>
+
+                    <div *ngIf="isLoadingVehicleNumber" class="spinner"></div>
+                    <div *ngIf="noVehicleFound" class="error">מספר רכב לא תקין</div>
+
+                </div>
+            </div>
+
+
+            <!-- <div *ngFor="let v of vehicleInfo">
+                <p>Make: {{v.tozeret_nm}}, Model: {{v.kinuy_mishari}}</p>
+            </div> -->
+            <!-- Manufacturer -->
+            <div class="form-row">
+                <label for="manufacturer">יצרן*</label>
+                <input id="manufacturer" formControlName="manufacturer" placeholder="הכנס שם יצרן" />
+                <div class="error" *ngIf="manufacturer.touched && manufacturer.invalid">
+                    <div *ngIf="manufacturer.hasError('required')">
+                        אנא מלא שם היצרן
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model -->
+            <div class="form-row">
+                <label for="model">דגם*</label>
+                <input id="model" formControlName="model" placeholder="הכנס דגם" />
+                <div class="error" *ngIf="model.touched && model.invalid">
+                    <div *ngIf="model.hasError('required')">
+                        אנא מלא דגם
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year -->
+            <div class="form-row">
+                <label for="year">שנה*</label>
+                <input id="year" formControlName="year" placeholder="מהי שנת היצור?" />
+                <div class="error" *ngIf="year.touched && year.invalid">
+                    <div *ngIf="year.hasError('required')">
+                        שדה חובה
+                    </div>
+                    <div *ngIf="year.hasError('pattern')">
+                        אנא הזן מספרים בלבד
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horsepower -->
+            <div class="form-row">
+                <label for="horsepower">כ״ס*</label>
+                <input type="number" id="horsepower" formControlName="horsepower" placeholder="הכנס כוח סוס" />
+                <div class="error" *ngIf="horsepower.touched && horsepower.invalid">
+                    <div *ngIf="horsepower.hasError('required')">
+                        שדה חובה
+                    </div>
+                    <div *ngIf="horsepower.hasError('pattern')">
+                        אנא הזן מספרים בלבד
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gearbox -->
+            <div class="form-row">
+                <label for="gearbox">תיבת הילוכים*</label>
+                <select id="gearbox" formControlName="gearbox" required class="multi-input-select ">
+                    <option value="" disabled hidden>אוטומטי או ידני?</option>
+                    <option value="אוטומטי">אוטומטי</option>
+                    <option value="ידני">ידני</option>
+                </select>
+                <div class="error" *ngIf="gearbox.touched && gearbox.invalid">
+                    <div *ngIf="gearbox.hasError('required')">
+                        אנא בחר תיבת הילוכים
+                    </div>
+                </div>
+            </div>
+
+            <!-- error block example -->
+            <!-- <div class="error" *ngIf="gearbox.touched && gearbox.invalid">
+                    <div *ngIf="gearbox.hasError('required')">שדה חובה</div>
+                </div> -->
+
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="vehicle-form-step" [class.active]="activeStep === 3">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=3">3</span>
+            <div class="success-icon" *ngIf="activeStep>3">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">פרטי הרכב </span>
+        </div>
+        <form [formGroup]="step3Form" (ngSubmit)="onSubmitStep3()" class="address-form">
+            <div class="form-row">
+                <label>צבע*</label>
+                <div class="color-picker">
+                    <label class="color-option" *ngFor="let c of colors"
+                        [class.selected]="step3Form.get('color')!.value === c.value">
+                        <input type="radio" formControlName="color" [value]="c.value" [attr.aria-label]="c.name" />
+                        <span class="swatch" [style.background-color]="c.hex"></span>
+                        <span class="name">{{ c.name }}</span>
+                    </label>
+                </div>
+            </div>
+            <hr class="divider">
+            <div class="form-row">
+                <label for="moed_aliya_lakvish">שנת עלייה לכביש*</label>
+                <input type="number" id="moed_aliya_lakvish" formControlName="moed_aliya_lakvish"
+                    placeholder="הכנס שנה" />
+
+                <div class="error" *ngIf="moed_aliya_lakvish.touched && moed_aliya_lakvish.invalid">
+                    <div *ngIf="moed_aliya_lakvish.hasError('required')">
+                        שדה חובה
+                    </div>
+                    <div *ngIf="moed_aliya_lakvish.hasError('max')">
+                        השנה לא יכולה להיות יותר מ‑{{ currentYear }}
+                    </div>
+                    <div *ngIf="moed_aliya_lakvish.hasError('min')">
+                        השנה לא יכולה להיות פחות מ1950
+                    </div>
+                </div>
+            </div>
+            <hr class="divider">
+            <div class="form-row">
+                <label for="yad">יד*</label>
+                <select id="yad" formControlName="yad" class="multi-input-select " required>
+                    <option value="" disabled hidden> ראשונה שנייה...</option>
+                    <option value="ראשונה">יד ראשונה</option>
+                    <option value="שנייה">יד שנייה</option>
+                    <option value="שלישית">יד שלישית</option>
+                    <option value="רביעית">יד רביעית</option>
+                    <option value="חמישית">יד חמישית</option>
+                </select>
+                <div class="error" *ngIf="yad.touched && yad.invalid">
+                    <div *ngIf="yad.hasError('required')">
+                        שדה חובה
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="baalut">בעלות נוכחית*</label>
+                <select id="baalut" formControlName="baalut" class="multi-input-select " required>
+                    <option value="" disabled hidden>בחר/י</option>
+                    <option value="פרטי">פרטי</option>
+                    <option value="חברה">חברה</option>
+                    <option value="ליסינג">ליסינג</option>
+                    <option value="השכרה">השכרה</option>
+                    <option value="חברה">חברה</option>
+                    <option value="מונית">מונית</option>
+                </select>
+                <div class="error" *ngIf="baalut.touched && baalut.invalid">
+                    <div *ngIf="baalut.hasError('required')">
+                        שדה חובה
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="kilometraj">קילומטראז'*</label>
+                <input type="number" id="kilometraj" formControlName="kilometraj" placeholder="הכנס ק''מ" />
+
+                <div class="error" *ngIf="kilometraj.touched && kilometraj.invalid">
+                    <div *ngIf="kilometraj.hasError('required')">
+                        שדה חובה
+                    </div>
+                    <div *ngIf="kilometraj.hasError('max')">
+                        קילומטראז לא תקין
+                    </div>
+                    <div *ngIf="kilometraj.hasError('min')">
+                        המינימום הוא 0
+                    </div>
+                </div>
+            </div>
+            <hr class="divider">
+            <div class="form-row">
+                <p style="font-weight: 500;margin-top: 40px;">מה חשוב לך שידעו על הרכב?</p>
+
+                <label for="description">
+                    <div>
+                        <p style="font-size: 14px; font-weight: 400;">הידעת: מודעה ללא תיאור, כמעט ולא מקבלת שיחות</p>
+                    </div>
+                </label>
+                <textarea id="description" formControlName="description"
+                    placeholder="זה המקום לתאר את הפרטים הבולטים"></textarea>
+                <div class="error" *ngIf="description.touched && description.invalid">
+                    <div *ngIf="description.hasError('required')">שכחת להוסיף תיאור!</div>
+                </div>
+                <p style="font-size: 12px;">אין צורך להוסיף מספר טלפון כחלק מהתיאור, בהמשך התהליך יש אזור מסודר לזה</p>
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="vehicle-form-step" [class.active]="activeStep === 4">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=4">4</span>
+            <div class="success-icon" *ngIf="activeStep>4">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">פרטי מכירה</span>
+        </div>
+        <form [formGroup]="step4Form" (ngSubmit)="onSubmitStep4()" class="address-form">
+            <div class="form-row">
+                <label for="price">מחיר</label>
+
+                <div class="currency-input">
+                    <span class="currency-prefix">₪</span>
+                    <input id="price" formControlName="price" placeholder="סכום מינימלי 1,000" maxlength="10"
+                        appThousandSeparator />
+                </div>
+                <div class="error" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.hasError('required')">שדה חובה</div>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-row">
+                <label for="location">ישוב*</label>
+                <input id="location" formControlName="location" placeholder="הכנס מיקום" />
+
+                <div class="error" *ngIf="location.touched && location.invalid">
+                    <div *ngIf="location.hasError('required')">
+                        שדה חובה
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div class="vehicle-form-step" [class.active]="activeStep === 5">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=5">5</span>
+            <div class="success-icon" *ngIf="activeStep>5">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">תמונות וסרטונים</span>
+        </div>
+        <div class="pictures-section">
+            <div class="pictures-info">ניתן להעלות עד 3 תמונות (כי אין לי כסף לאחסון גדול 😊) אחרי הבחירה, בחרו את
+                מרכז התמונה כדי שתופיע
+                באתר בצורה המוקטנת הטובה ביותר. <br />
+                אין לכם מה לדאוג, בגלריה התמונה תופיע בגודלה המקורי</div>
+            <uc-config #ucConfig ctx-name="my-uploader" source-list="local,url" pubkey="6e6d7483b35fc62822d6"
+                multiple="true" removeCopyright="true" multiple-max="3"> <!-- ← limit to 3 files -->></uc-config>
+
+            <uc-upload-ctx-provider ctx-name="my-uploader"
+                (common-upload-success)="onAllUploaded($any($event).detail.successEntries)"
+                (change)="onCollectionChanged($any($event).detail)">
+            </uc-upload-ctx-provider>
+
+            <uc-file-uploader-regular ctx-name="my-uploader" class="uc-light uc-gray">
+            </uc-file-uploader-regular>
+
+            <!-- error message, shown 1× when you try to submit with zero files -->
+            <div class="error" *ngIf="showUploadError" style="margin-top:8px;">
+                אנא העלה לפחות תמונה אחת
+            </div>
+
+            <div *ngIf="uploadedUrls.length > 0" style="margin-top: 20px;">
+                תצוגה מקדימה
+            </div>
+            <div class="images-preview">
+
+                <img *ngFor="let url of uploadedUrls" [src]="url" class="preview-image" />
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="button" (click)="onSubmitStep5()" class="btn-next-step">
+                    לשלב הבא
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="vehicle-form-step" [class.active]="activeStep === 6">
+        <div class="title-container">
+            <span class="step-number" *ngIf="activeStep<=6">6</span>
+            <div class="success-icon" *ngIf="activeStep>6">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13 L10 18 L20 8" fill="none" stroke="#0CCC84" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+            </div>
+            <span class="step-title">
+                פרטי התקשרות
+            </span>
+        </div>
+        <form [formGroup]="step6Form" (ngSubmit)="onSubmitStep6()" class="address-form">
+            <div class="form-row">
+                <label for="name">השם שלך*</label>
+                <input id="name" formControlName="name" />
+                <div class="error" *ngIf="name.touched && name.invalid">
+                    <div *ngIf="name.hasError('required')">שדה חובה</div>
+                    <div *ngIf="name.hasError('pattern') || name.hasError('minlength')">לא תקין</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="phone">טלפון*</label>
+                <input id="phone" formControlName="phone" />
+                <div class="error" *ngIf="phone.touched && phone.invalid">
+                    <div *ngIf="phone.hasError('required')">שדה חובה</div>
+                    <div *ngIf="phone.hasError('pattern')">לא תקין</div>
+                </div>
+            </div>
+
+            <div class="next-back-btn-container">
+                <button type="button" class="btn-back" (click)="onBack()">
+                    חזרה
+                </button>
+                <button type="submit" class="btn-next-step" style="font-weight: 900 !important;font-size: 16px;">
+                    פרסם !
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

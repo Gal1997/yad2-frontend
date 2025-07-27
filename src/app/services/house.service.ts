@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import House from '../models/house';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class HouseService {
   private apiUrl = 'http://localhost:3000/api/house';
 

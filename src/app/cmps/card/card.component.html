@@ -1,10 +1,23 @@
-<div class="product-item" (click)="onCardClick(item)">
+<!-- Vehicle Card -->
+<div *ngIf="isVehicle(item)" class="product-item" (click)="onCardClick(item)">
     <div class="image-wrapper">
         <img class="item-image" [src]="item.images[0]" alt="Image Unavailable" />
     </div>
     <div class="item-info">
-        <div class="house-price">{{ item.price | number }} ₪</div>
-        <div class="house-address">{{ item.street }} {{item.number}}, {{ item.city }}</div>
-        <div class="house-rooms">{{ item.rooms }} חדרים</div>
+        <div class="info1">{{ item.price | number }} ₪</div>
+        <div class="info2">{{ item.manufacturer }} {{ item.degem }}</div>
+        <div class="info3">{{ item.year }}</div>
+    </div>
+</div>
+
+<!-- House Card -->
+<div *ngIf="isHouse(item)" class="product-item" (click)="onCardClick(item)">
+    <div class="image-wrapper">
+        <img class="item-image" [src]="item.images[0]" alt="Image Unavailable" />
+    </div>
+    <div class="item-info">
+        <div class="info1">{{ item.price | number }} ₪</div>
+        <div class="info2">{{ item.street }} {{ item.number }}, {{ item.city }}</div>
+        <div class="info3">{{ item.rooms }} חדרים</div>
     </div>
 </div>

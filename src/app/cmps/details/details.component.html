@@ -1,8 +1,10 @@
-<div class="details-container">
+<div *ngIf="type === 'house'" class="details-container">
     <div class="details-images">
         <div class="thumbnails">
-            <img src={{house.images[2]}} alt="Random image">
-            <img src={{house.images[1]}} alt="Random image">
+            <img [src]="house.images[2] || 'https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png'"
+                alt="House image">
+            <img [src]="house.images[1] || 'https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png'"
+                alt="House image">
         </div>
         <div class="main-media">
             <img src={{house.images[0]}} alt="Random image">
@@ -16,7 +18,7 @@
             <div class="cta">
                 <button *ngIf="!showPhoneNumber" class="btn-primary" (click)="showPhoneNumber = true">הצגת מספר
                     טלפון</button>
-                <div class="phoneNumber" *ngIf="showPhoneNumber">{{house.phoneNumber}}</div>
+                <div class="phoneNumber" *ngIf="showPhoneNumber">{{formatTenDigits(house.phoneNumber)}}</div>
                 <button class="btn-secondary">שליחת הודעה</button>
             </div>
         </div>

@@ -1,0 +1,393 @@
+.vehicle-form-main-container {
+    //width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 50px;
+    padding-bottom: 12px;
+}
+
+.vehicle-form-step {
+    width: 100%;
+    max-width: 880px;
+    min-width: 200px;
+    height: 60px;
+    border-radius: 10px;
+    align-content: center;
+    border: 1px solid rgba(112, 112, 112, 0.2);
+    box-sizing: border-box;
+    direction: rtl;
+    padding: 10px 15px;
+
+
+    &.active {
+        opacity: 0.85;
+        border: 1px solid rgba(112, 112, 112, 0.35);
+        height: fit-content;
+        background-color: white;
+        padding-top: 25px;
+
+        .step-number {
+            color: #0fca80;
+            border: 2px solid #0fca80;
+            opacity: 1;
+        }
+
+        .step-title {
+            font-size: 24px;
+            opacity: 1;
+        }
+    }
+}
+
+
+.step-number {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.85);
+    border: 2px solid gray;
+    border-radius: 100%;
+    padding: 4px 9px 4px 9px;
+    opacity: 0.365;
+}
+
+.step-title {
+    margin-right: 8px;
+    font-size: 20px;
+    align-items: center;
+    opacity: 0.365;
+
+}
+
+.address-form {
+    margin-top: 25px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 7px;
+    margin-right: 25px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+select,
+input {
+    width: fit-content;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+
+    &:focus {
+        border: 1px solid black;
+        outline: none;
+    }
+}
+
+
+/* now only that one gets gray */
+select option.placeholder-option {
+    color: red;
+}
+
+.form-top-note {
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.form-how-many-floors {
+    display: flex;
+    flex-direction: row;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    input {
+        width: 150px;
+    }
+
+    gap: 20px;
+}
+
+.btn-next-step {
+    color: #ff7404;
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: 1px solid #ff821c;
+    font-weight: 600;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-next-step:hover {
+    background: rgba(255, 102, 0, 0.07);
+}
+
+.btn-back {
+    padding: 10px 35px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    font-weight: 400;
+    opacity: 0.9;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    border: 1px solid rgba(0, 0, 0, 0.65);
+}
+
+
+.next-back-btn-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 15px;
+
+}
+
+.error {
+    color: #d32f2f; // Material “red 700” for errors
+    font-size: 0.875rem; // smaller text
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+.vehicle-form-step .address-form {
+    display: none;
+}
+
+.vehicle-form-step .pictures-section {
+    display: none;
+}
+
+
+.vehicle-form-step.active .address-form {
+    display: block;
+}
+
+.vehicle-form-step.active .pictures-section {
+    display: block;
+}
+
+
+
+textarea {
+    width: 380px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    resize: none; // Disable user resizing
+    font-size: 16px;
+
+
+    &::placeholder {
+        opacity: 0.7; // Optional: ensure full opacity
+    }
+
+    &:focus {
+        border: 1px solid rgba(0, 0, 0, 1);
+        outline: none;
+        opacity: 1;
+    }
+}
+
+
+
+.currency-input {
+    position: relative;
+    font-size: 14px;
+
+    .currency-prefix {
+        position: absolute;
+        top: 48%;
+        right: 190px;
+        transform: translateY(-50%);
+        opacity: 0.75;
+    }
+
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 20px;
+
+}
+
+
+.images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    ;
+}
+
+.pictures-info {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 15px;
+
+
+}
+
+.success-icon {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(129, 251, 206, 0.25);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 25px;
+        height: 25px;
+
+    }
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 2px
+}
+
+.search-btn {
+    border-radius: 200px;
+    padding: 12px 18px 12px 18px;
+    border: 0px solid black;
+    margin-right: 20px;
+    width: fit-content;
+}
+
+.search-btn:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.multi-input-select {
+    width: 216px;
+    color: gray;
+}
+
+.multi-input-select:valid {
+    color: black;
+}
+
+//All these 3 are to remove the arrows that come with type = "number"
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* IE (if you care) */
+input[type="number"]::-ms-clear {
+    display: none;
+}
+
+.spinner {
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid orange;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.color-picker {
+    display: grid;
+    grid-template-columns: repeat(6, 50px);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.color-option {
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .swatch {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.4s, box-shadow 0.4s;
+    }
+
+    .name {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: #444;
+    }
+
+    &.selected {
+        .swatch {
+            border-color: white; // highlight color
+            box-shadow: 0 0 0 2px black; // subtle outer ring
+
+        }
+
+        .name {
+            font-weight: 600;
+            color: #000;
+        }
+    }
+
+}
+
+.divider {
+    opacity: 0.3;
+    margin: 40px 20px 40px 20px;
+}

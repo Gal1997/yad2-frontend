@@ -4,6 +4,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from "../../cmps/card/card.component";
 import { HouseService } from '../../services/house.service';
 import House from '../../models/house';
+import { VehicleService } from '../../services/vehicle.service';
+import Vehicle from '../../models/vehicle';
 
 
 @Component({
@@ -14,13 +16,24 @@ import House from '../../models/house';
   standalone: true
 })
 export class LandingPageComponent implements OnInit {
-  products: House[] = [];
+  allHouses: House[] = [];
+  allVehicles: Vehicle[] = [];
   private houseService = inject(HouseService);
+  private vehicleService = inject(VehicleService)
 
   ngOnInit() {
     this.houseService.getAll().subscribe({
       next: data => {
-        this.products = data;
+        this.allHouses = data;
+      },
+      error: err => {
+        console.error('Error fetching data:', err);
+      }
+    });
+
+    this.vehicleService.getAll().subscribe({
+      next: data => {
+        this.allVehicles = data;
       },
       error: err => {
         console.error('Error fetching data:', err);

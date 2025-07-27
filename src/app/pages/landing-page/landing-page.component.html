@@ -29,12 +29,25 @@
             <p>עסקים למכירה</p>
         </div>
     </div>
-    <div>
-        <p-carousel [value]="products" [numVisible]="4" [numScroll]="2" [circular]="true">
-            <ng-template pTemplate="item" let-product>
-                <app-card [item]="product" />
-            </ng-template>
-        </p-carousel>
+    <div class="carousels-container">
+        <div>
+            <p class="category_title">נדלן</p>
+            <p-carousel [value]="allHouses" [numVisible]="4" [numScroll]="2" [circular]="true">
+                <ng-template pTemplate="item" let-houses>
+                    <app-card [item]="houses" />
+                </ng-template>
+            </p-carousel>
+        </div>
+        <img src="/fake-ad.webp" alt="Gal2 Logo" />
+        <div>
+            <p class="category_title">רכב</p>
+            <p-carousel [value]="allVehicles" [numVisible]="4" [numScroll]="2" [circular]="true">
+                <ng-template pTemplate="item" let-vehicles>
+                    <app-card [item]="vehicles" />
+                </ng-template>
+            </p-carousel>
+        </div>
+
     </div>
 
 </div>

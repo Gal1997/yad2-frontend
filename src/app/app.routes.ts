@@ -7,6 +7,7 @@ import { PublishPageComponent } from './pages/publish-page/publish-page.componen
 import { IndexPageComponent } from './cmps/publish-cmps/index-page/index-page.component';
 import { NadlanFormComponent } from './cmps/publish-cmps/nadlan-form/nadlan-form.component';
 import { authGuard } from './guards/auth.guard';
+import { VehicleFormComponent } from './cmps/publish-cmps/vehicle-form/vehicle-form.component';
 
 export const routes: Routes = [
     { path: 'home', component: LandingPageComponent },
@@ -21,7 +22,8 @@ export const routes: Routes = [
         children: [
             // default child when you hit /publish
             { path: '', component: IndexPageComponent },
-            { path: 'nadlan', component: NadlanFormComponent }
+            { path: 'nadlan', component: NadlanFormComponent },
+            { path: 'vehicle', component: VehicleFormComponent }
             // another page under /publish
             // { path: 'review',     component: PublishReviewComponent },
             // you can add more steps here…
