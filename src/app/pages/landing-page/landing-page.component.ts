@@ -6,11 +6,12 @@ import { HouseService } from '../../services/house.service';
 import House from '../../models/house';
 import { VehicleService } from '../../services/vehicle.service';
 import Vehicle from '../../models/vehicle';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-landing-page',
-  imports: [CommonModule, CarouselModule, CardComponent],
+  imports: [CommonModule, CarouselModule, CardComponent, RouterModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
   standalone: true
@@ -20,6 +21,7 @@ export class LandingPageComponent implements OnInit {
   allVehicles: Vehicle[] = [];
   private houseService = inject(HouseService);
   private vehicleService = inject(VehicleService)
+  private router = inject(Router)
 
   ngOnInit() {
     this.houseService.getAll().subscribe({
@@ -39,6 +41,11 @@ export class LandingPageComponent implements OnInit {
         console.error('Error fetching data:', err);
       }
     });
+  }
+
+
+  bannerClick() {
+    this.router.navigate(['/publish'])
   }
 
 

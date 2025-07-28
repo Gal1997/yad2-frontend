@@ -1,0 +1,245 @@
+.yad2-form-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 50px;
+    padding-bottom: 12px;
+    box-shadow: 0 0 242px 0 rgba(0, 0, 0, 0.05);
+}
+
+.yad2-form-step {
+    width: 100%;
+    max-width: 880px;
+    min-width: 200px;
+    height: fit-content;
+    border-radius: 10px;
+    align-content: center;
+    border: 1px solid rgba(112, 112, 112, 0.35);
+    box-sizing: border-box;
+    direction: rtl;
+    padding: 35px 20px;
+    opacity: 0.85;
+    background-color: white;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.17);
+    border: transparent;
+
+
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+}
+
+
+.step-number {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.85);
+    border: 2px solid gray;
+    border-radius: 100%;
+    padding: 4px 9px 4px 9px;
+    opacity: 0.365;
+}
+
+.step-title {
+    margin-right: 8px;
+    font-weight: 500;
+    align-items: center;
+    font-size: 26px;
+    opacity: 1;
+    padding-bottom: 25px;
+
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 7px;
+    margin-right: 25px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+select,
+input {
+    width: 300px;
+    padding: 12px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+
+    &:focus {
+        border: 1px solid black;
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba($color: gray, $alpha: 0.8)
+    }
+}
+
+
+//All these 3 are to remove the arrows that come with type = "number"
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* IE (if you care) */
+input[type="number"]::-ms-clear {
+    display: none;
+}
+
+.error {
+    color: #d32f2f; // Material “red 700” for errors
+    font-size: 0.875rem; // smaller text
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+.divider {
+    opacity: 0.3;
+    margin: 40px 20px 40px 20px;
+}
+
+.multi-input-select {
+    width: 320px;
+    color: gray;
+}
+
+.multi-input-select:valid {
+    color: black;
+}
+
+.condition-btns {
+    display: flex;
+    gap: 12px;
+
+    button {
+        margin-top: 10px;
+        font-size: 14px;
+        padding: 15px 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: white;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out;
+
+        &.selected {
+            border-color: #ff6c00;
+            color: #ff6c00;
+            background-color: #fff7f2;
+        }
+
+    }
+
+    button:hover {
+        border-color: #ff6c00;
+        color: #ff6c00;
+    }
+}
+
+.images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    ;
+}
+
+
+textarea {
+    width: 380px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    resize: none; // Disable user resizing
+    font-size: 15px;
+
+
+    &::placeholder {
+        opacity: 0.7; // Optional: ensure full opacity
+    }
+
+    &:focus {
+        border: 1px solid rgba(0, 0, 0, 1);
+        outline: none;
+        opacity: 1;
+    }
+}
+
+.currency-input {
+    position: relative;
+    font-size: 14px;
+
+    .currency-prefix {
+        position: absolute;
+        top: 48%;
+        right: 300px;
+        transform: translateY(-50%);
+        opacity: 0.75;
+    }
+
+}
+
+.btn-next-step {
+    color: white;
+    padding: 10px 65px;
+    border-radius: 100px;
+    font-weight: 600;
+    background-color: #ff7300;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 40px;
+    justify-self: end;
+    align-self: start;
+    display: flex;
+
+}
+
+.next-back-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.btn-back {
+    padding: 10px 55px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    font-weight: 400;
+    opacity: 0.9;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.btn-back:hover {
+    border: 1px solid rgba(0, 0, 0, 0.65);
+    background-color: rgba(79, 79, 79, 0.05);
+}

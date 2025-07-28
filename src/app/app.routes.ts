@@ -8,6 +8,7 @@ import { IndexPageComponent } from './cmps/publish-cmps/index-page/index-page.co
 import { NadlanFormComponent } from './cmps/publish-cmps/nadlan-form/nadlan-form.component';
 import { authGuard } from './guards/auth.guard';
 import { VehicleFormComponent } from './cmps/publish-cmps/vehicle-form/vehicle-form.component';
+import { Yad2FormComponent } from './cmps/publish-cmps/yad2-form/yad2-form.component';
 
 export const routes: Routes = [
     { path: 'home', component: LandingPageComponent },
@@ -23,10 +24,8 @@ export const routes: Routes = [
             // default child when you hit /publish
             { path: '', component: IndexPageComponent },
             { path: 'nadlan', component: NadlanFormComponent },
-            { path: 'vehicle', component: VehicleFormComponent }
-            // another page under /publish
-            // { path: 'review',     component: PublishReviewComponent },
-            // you can add more steps here…
+            { path: 'vehicle', component: VehicleFormComponent },
+            { path: 'yad2', component: Yad2FormComponent }
         ]
     },
     //{ path: '**', component: PageNotFoundComponent}

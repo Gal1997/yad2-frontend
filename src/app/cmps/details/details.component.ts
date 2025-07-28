@@ -7,61 +7,71 @@ import Vehicle from '../../models/vehicle';
 import { VehicleService } from '../../services/vehicle.service';
 
 @Component({
-  selector: 'app-house-details',
+  selector: 'app-details',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
-  house!: House;
-  vehicle!: Vehicle;
-  type!: string;
-  showPhoneNumber: boolean = false;
+  item!: House | Vehicle;
+  type!: 'house' | 'vehicle' | '';
+  showPhoneNumber = false;
+
   private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute)
-  private houseService = inject(HouseService)
-  private vehicleService = inject(VehicleService)
-
-
+  private route = inject(ActivatedRoute);
+  private houseService = inject(HouseService);
+  private vehicleService = inject(VehicleService);
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
+    this.item = history.state.item;
     this.type = history.state.type;
 
-    if (this.type === 'vehicle')
-      this.vehicle = history.state.item
-    else if (this.type === 'house')
-      this.house = history.state.item
+    if (!this.item && id) {
+      console.log('No item in state, fetching from backend...');
 
-
-    console.log(this.type);
-
-
-    if (!this.house && !this.vehicle && id) {
-      // Cool: only fetch if can't get data from route (like if user came from link and not from clicking a house)
-      // Instead of always fetching from backend
-      console.log("No item in state, fetching from backend...");
-
-      if (this.type === 'house')
-        this.houseService.getById(id!).subscribe((house: House) => {
-          this.house = house;
-        });
-      else if (this.type === 'vehicle')
-        this.vehicleService.getById(id!).subscribe((vehicle: Vehicle) => {
-          this.vehicle = vehicle;
-        });
-
+      // Try fetching from both services (sequentially)
+      this.houseService.getById(id).subscribe({
+        next: (house) => {
+          if (house) {
+            this.item = house;
+            this.type = 'house';
+          }
+        },
+        error: () => {
+          this.vehicleService.getById(id).subscribe({
+            next: (vehicle) => {
+              if (vehicle) {
+                this.item = vehicle;
+                this.type = 'vehicle';
+              }
+            },
+            error: () => {
+              console.warn('Item not found in either service.');
+              this.type = '';
+            }
+          });
+        }
+      });
     }
   }
 
-
-  formatTenDigits(input: string): string {
-    if (!/^\d{10}$/.test(input)) return input;
-    return input.slice(0, 3) + '-' + input.slice(3, 7) + '-' + input.slice(7);
+  // item is House is for the html. without it doing ngIf(isHouse(item)) won't be possible
+  // and as a result typescript will not know item is a house.
+  isHouse(item: House | Vehicle): item is House {
+    return this.type === 'house';
   }
 
+  isVehicle(item: House | Vehicle): item is Vehicle {
+    return this.type === 'vehicle';
+  }
 
+  formatTenDigits(input: string): string {
+    return input.slice(0, 3) + '-' + input.slice(3, 6) + '-' + input.slice(6);
+  }
 
-
-
+  addCommas(numStr: string): string {
+    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 }

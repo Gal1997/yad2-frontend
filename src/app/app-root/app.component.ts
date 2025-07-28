@@ -4,10 +4,11 @@ import { AppHeaderComponent } from "../cmps/app-header/app-header.component";
 
 import { LandingPageComponent } from "../pages/landing-page/landing-page.component";
 import { CommonModule } from '@angular/common';
+import { AppFooterComponent } from "../cmps/app-footer/app-footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeaderComponent, LandingPageComponent, CommonModule],
+  imports: [RouterOutlet, AppHeaderComponent, LandingPageComponent, CommonModule, AppFooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

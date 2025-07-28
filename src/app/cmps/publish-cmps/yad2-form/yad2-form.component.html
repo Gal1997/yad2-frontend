@@ -1,0 +1,173 @@
+<div class="yad2-form-main-container">
+    <div class="yad2-form-step" [class.active]="activeStep === 1">
+        <form [formGroup]="firstForm" (ngSubmit)="onSubmitStep1()">
+            <div class="step-title">מה תרצו למכור?</div>
+
+            <div class="form-row">
+                <label for="itemName">שם המוצר</label>
+                <input id="itemName" formControlName="itemName" placeholder="לדוגמא: אייפון 12, נעלי נייק ג'ורדן" />
+
+                <div class="error" *ngIf="itemName.touched && itemName.invalid">
+                    <div *ngIf="itemName.hasError('required')">
+                        שדה חובה
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <p style="margin-top: 10px;font-weight: 500;">זו ההזדמנות שלכם לבלוט..</p>
+                <div class="pictures-info">ניתן להעלות עד 3 תמונות (כי אין לי כסף לאחסון גדול 😊) אחרי הבחירה, בחרו את
+                    מרכז התמונה כדי שתופיע
+                    באתר בצורה המוקטנת הטובה ביותר. <br />
+                    אין לכם מה לדאוג, בגלריה התמונה תופיע בגודלה המקורי</div>
+                <uc-config #ucConfig ctx-name="my-uploader" source-list="local,url" pubkey="6e6d7483b35fc62822d6"
+                    multiple="true" removeCopyright="true" multiple-max="3"> <!-- ← limit to 3 files -->></uc-config>
+
+                <uc-upload-ctx-provider ctx-name="my-uploader"
+                    (common-upload-success)="onAllUploaded($any($event).detail.successEntries)"
+                    (change)="onCollectionChanged($any($event).detail)">
+                </uc-upload-ctx-provider>
+
+                <uc-file-uploader-regular ctx-name="my-uploader" class="uc-light uc-gray">
+                </uc-file-uploader-regular>
+
+                <div class="error" *ngIf="showUploadError" style="margin-top:8px;">
+                    אנא העלה לפחות תמונה אחת
+                </div>
+
+                <div *ngIf="uploadedUrls.length > 0" style="margin-top: 20px;">
+                    תצוגה מקדימה
+                </div>
+                <div class="images-preview">
+
+                    <img *ngFor="let url of uploadedUrls" [src]="url" class="preview-image" />
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="form-row">
+                <div class="step-title">
+                    ספרו לנו קצת על המוצר שלכם
+                </div>
+
+                <label for="itemType">סוג המוצר</label>
+                <select id="itemType" formControlName="itemType" required class="multi-input-select ">
+                    <option value="" disabled hidden>יש לבחור את סוג המוצר המתאים ביותר</option>
+                    <option value="מוצר חשמלי">מוצר חשמלי</option>
+                    <option value="פריט לבוש">פריט לבוש</option>
+                    <option value="ריהוט">ריהוט</option>
+                    <option value="צעצועים">צעצועים</option>
+                    <option value="כלי נגינה">כלי נגינה</option>
+                </select>
+                <div class="error" *ngIf="itemType.touched && itemType.invalid">
+                    <div *ngIf="itemType.hasError('required')">שדה חובה</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;" class="form-row">
+                <label>מצב המוצר</label>
+                <p style="opacity: 0.6;font-size: 15px;">השתדלו לדייק כדי לא לאכזב את הלקוחות שלכם</p>
+
+                <div class="condition-btns" *ngIf="conditions && conditions.length">
+                    <button type="button" *ngFor="let condition of conditions"
+                        (click)="selectCondition(condition.value)"
+                        [ngClass]="{ selected: itemCondition.value === condition.value }">
+                        {{ condition.label }}
+                    </button>
+                </div>
+                <div class="error" *ngIf="showItemConditionError" style="margin-top:8px;">
+                    שדה חובה
+                </div>
+            </div>
+
+            <div class="form-row">
+                <p style="font-weight: 500;margin-top: 40px;">מה עוד כדאי לדעת?</p>
+
+                <label for="itemDescription">
+                    <div>
+                        <p style="font-size: 14px; font-weight: 400;">ממליצים לך בחום להוסיף פירוט</p>
+                    </div>
+                </label>
+                <textarea id="itemDescription" formControlName="itemDescription"
+                    placeholder="זה המקום לספר כל מה שמעניין על המוצר שלכם. למשל, יתרונות בולטים, מצב הפריט, כמה זמן המוצר אצלכם, פגמים, שריטות ועוד"></textarea>
+                <div class="error" *ngIf="itemDescription.touched && itemDescription.invalid">
+                    <div *ngIf="itemDescription.hasError('required')">שכחת להוסיף תיאור!</div>
+                </div>
+                <p style="font-size: 12px;">אין צורך להוסיף מספר טלפון כחלק מהתיאור, בהמשך התהליך יש אזור מסודר לזה</p>
+            </div>
+            <hr class="divider">
+
+            <div class="form-row">
+                <div class="step-title">
+                    מה המחיר שתרצו על המוצר?
+                </div>
+                <label for="price">מחיר</label>
+
+                <div class="currency-input">
+                    <span class="currency-prefix">₪</span>
+                    <input id="price" formControlName="itemPrice" placeholder="סכום מינימלי 10,000" maxlength="10"
+                        appThousandSeparator />
+                </div>
+
+                <div class="error" *ngIf="itemPrice.touched && itemPrice.invalid">
+                    <div *ngIf="itemPrice.hasError('required')">שדה חובה</div>
+                </div>
+            </div>
+            <button type="submit" class="btn-next-step" (click)="onSubmitStep1()">המשך</button>
+        </form>
+    </div>
+
+    <div class="yad2-form-step" [class.active]="activeStep === 2">
+
+        <form [formGroup]="secondForm" (ngSubmit)="onSubmitStep2()">
+            <div style="padding-bottom: 10px !important;" class="step-title">מאיפה אוספים את המוצר?</div>
+            <p style="opacity: 0.5;font-size: 14px;font-weight: 100;">אנחנו ממליצים שזו תהיה הכתובת בה נמצאים רוב היום
+                (בית או מקום
+                עבודה).</p>
+            <p style="opacity: 0.5;font-weight: 500;font-size: 14px;">אל דאגה, נפרסם רק את העיר ולא את הכתובת המלאה.</p>
+            <div style="margin-top: 30px;" class="form-row">
+                <input id="pickupAddress" formControlName="pickupAddress" placeholder="לדוגמא: נחל ליטאני 2, גדרה" />
+
+                <div class="error" *ngIf="pickupAddress.touched && pickupAddress.invalid">
+                    <div *ngIf="itemName.hasError('required')">
+                        שדה חובה
+                    </div>
+                    <div *ngIf="itemName.hasError('pattern')">
+                        לא תקין
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+            <div class="step-title">עם מי מדברים?</div>
+            <div class="form-row">
+                <label for="ownerName">איש קשר</label>
+                <input id="ownerName" formControlName="ownerName" />
+                <div class="error" *ngIf="ownerName.touched && ownerName.invalid">
+                    <div *ngIf="ownerName.hasError('required')">שדה חובה</div>
+                    <div *ngIf="ownerName.hasError('pattern') || ownerName.hasError('minlength')">לא תקין</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="ownerPhoneNumber">טלפון</label>
+                <input id="ownerPhoneNumber" formControlName="ownerPhoneNumber" />
+                <div class="error" *ngIf="ownerPhoneNumber.touched && ownerPhoneNumber.invalid">
+                    <div *ngIf="ownerPhoneNumber.hasError('required')">שדה חובה</div>
+                    <div *ngIf="ownerPhoneNumber.hasError('pattern')">מספר לא תקין</div>
+                </div>
+            </div>
+        </form>
+
+        <div class="next-back-btn-container">
+            <button type="button" class="btn-back" (click)="onBack()">
+                חזרה
+            </button>
+            <button (click)="onSubmitStep2()" type="submit" class="btn-next-step"
+                style="font-weight: 900 !important;font-size: 16px;">
+                פרסם !
+            </button>
+
+        </div>
+    </div>
+</div>

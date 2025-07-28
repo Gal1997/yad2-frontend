@@ -135,13 +135,25 @@
                 display: flex;
                 width: fit-content;
                 gap: 40px;
-                font-size: 16px;
-                border: 1px solid rgba(100, 100, 100, 0.2);
+                font-size: 18px;
+                border: 1px solid rgba(100, 100, 100, 0.26);
+                opacity: 0.75;
                 border-radius: 10px;
                 padding: 20px;
+                align-items: center;
+                justify-items: center;
+                justify-content: center;
 
                 .icon {
                     margin-right: 4px;
+                }
+
+                svg {
+                    position: relative;
+                    top: 5px;
+                    margin-left: 4px;
+                    width: 1.3em;
+                    height: 1.3em;
                 }
             }
 
@@ -195,4 +207,17 @@
 .meta-value {
     font-size: 1rem;
     color: #222;
+}
+
+.vehicle-location {
+    font-weight: 500;
+    margin-top: 10px;
+
+    svg {
+        position: relative;
+        top: 5px;
+        margin-left: 4px;
+        width: 1.3em;
+        height: 1.3em;
+    }
 }
