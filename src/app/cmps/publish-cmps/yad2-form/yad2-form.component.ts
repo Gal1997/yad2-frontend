@@ -85,7 +85,8 @@ export class Yad2FormComponent {
       itemType: ['', Validators.required],
       itemCondition: ['', Validators.required],
       itemDescription: ['', Validators.required],
-      itemPrice: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
+      itemPrice: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      itemExtraInfoBadge: [''] // Like "חבל לפספס" or "אחריות בתוקף"
     });
     this.secondForm = this.fb.group({
       ownerName: [
@@ -108,7 +109,8 @@ export class Yad2FormComponent {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[\p{L}\d\s,'"-]+$/u)
+          // Require at least one comma in the address
+          Validators.pattern(/^[\p{L}\d\s,'"-]+,[\p{L}\d\s,'"-]+$/u)
         ]
       ]
     });
@@ -176,6 +178,8 @@ export class Yad2FormComponent {
           itemName: this.itemName.value,
           itemPrice: this.itemPrice.value,
           itemType: this.itemType.value,
+          itemAddress: this.pickupAddress.value,
+          itemExtraInfoBadge: this.getRandomExtraBadge(),
           images: this.uploadedUrls,
 
         };
@@ -197,6 +201,18 @@ export class Yad2FormComponent {
     } else {
       this.secondForm.markAllAsTouched();
     }
+  }
+
+  getRandomExtraBadge() {
+    const conditions = [
+      "חבל לפספס",
+      "גמיש במחיר",
+      "בהזדמנות",
+      "אחריות בתוקף",
+      "באריזה מקורית"
+    ];
+    const idx = Math.floor(Math.random() * conditions.length);
+    return conditions[idx];
   }
 
   onBack() {

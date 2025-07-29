@@ -21,3 +21,24 @@
         <div class="info3">{{ item.rooms }} חדרים</div>
     </div>
 </div>
+
+<!-- Yad2 Card -->
+<div *ngIf="isYad2(item)" class="yad2-item" (click)="onCardClick(item)">
+    <div class="image-wrapper">
+        <img class="yad2-item-image" [src]="item.images[0]" alt="Image Unavailable" />
+    </div>
+    <div class="item-info">
+        <div style="display: flex;justify-content: space-between;">
+            <div class="info1">₪{{ item.itemPrice | number }}</div>
+            <div class="yad2-address">{{ item.itemAddress.split(',')[1]?.trim() }}</div>
+        </div>
+
+        <div class="info2">{{ item.itemName }}</div>
+        <div style="display: flex; gap: 10px;">
+            <p class="condition-tag">{{item.itemCondition}}</p>
+            <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
+        </div>
+
+        <!-- <div class="info3">{{ item.rooms }} חדרים</div> -->
+    </div>
+</div>

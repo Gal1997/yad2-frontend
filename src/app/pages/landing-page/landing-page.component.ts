@@ -7,6 +7,8 @@ import House from '../../models/house';
 import { VehicleService } from '../../services/vehicle.service';
 import Vehicle from '../../models/vehicle';
 import { Router, RouterModule } from '@angular/router';
+import Yad2 from '../../models/yad2';
+import { Yad2Service } from '../../services/yad2.service';
 
 
 @Component({
@@ -19,8 +21,10 @@ import { Router, RouterModule } from '@angular/router';
 export class LandingPageComponent implements OnInit {
   allHouses: House[] = [];
   allVehicles: Vehicle[] = [];
+  allYad2: Yad2[] = [];
   private houseService = inject(HouseService);
   private vehicleService = inject(VehicleService)
+  private yad2Service = inject(Yad2Service)
   private router = inject(Router)
 
   ngOnInit() {
@@ -36,6 +40,15 @@ export class LandingPageComponent implements OnInit {
     this.vehicleService.getAll().subscribe({
       next: data => {
         this.allVehicles = data;
+      },
+      error: err => {
+        console.error('Error fetching data:', err);
+      }
+    });
+
+    this.yad2Service.getAll().subscribe({
+      next: data => {
+        this.allYad2 = data;
       },
       error: err => {
         console.error('Error fetching data:', err);

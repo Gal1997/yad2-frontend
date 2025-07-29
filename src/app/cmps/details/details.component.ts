@@ -5,7 +5,9 @@ import { HouseService } from '../../services/house.service';
 import House from '../../models/house';
 import Vehicle from '../../models/vehicle';
 import { VehicleService } from '../../services/vehicle.service';
+import Yad2 from '../../models/yad2';
 
+type CardItem = House | Vehicle | Yad2;
 @Component({
   selector: 'app-details',
   standalone: true,
@@ -14,8 +16,8 @@ import { VehicleService } from '../../services/vehicle.service';
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
-  item!: House | Vehicle;
-  type!: 'house' | 'vehicle' | '';
+  item!: CardItem;
+  type!: 'house' | 'vehicle' | 'yad2' | '';
   showPhoneNumber = false;
 
   private router = inject(Router);
@@ -59,12 +61,16 @@ export class DetailsComponent implements OnInit {
 
   // item is House is for the html. without it doing ngIf(isHouse(item)) won't be possible
   // and as a result typescript will not know item is a house.
-  isHouse(item: House | Vehicle): item is House {
+  isHouse(item: CardItem): item is House {
     return this.type === 'house';
   }
 
-  isVehicle(item: House | Vehicle): item is Vehicle {
+  isVehicle(item: CardItem): item is Vehicle {
     return this.type === 'vehicle';
+  }
+
+  isYad2(item: CardItem): item is Yad2 {
+    return this.type === 'yad2';
   }
 
   formatTenDigits(input: string): string {

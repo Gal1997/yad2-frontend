@@ -158,3 +158,61 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="isYad2(item)" class="details-container">
+    <div>
+        <div class="yad2-main-image-container">
+            <img class="yad2-main-image" src={{item.images[0]}} alt="Random image">
+        </div>
+        <div class="yad2-secondary-image-container">
+            <img *ngIf="item.images[2]" class="yad2-secondary-image" [src]="item.images[2]" alt="House image">
+            <img *ngIf="item.images[1]" class="yad2-secondary-image" [src]="item.images[1]" alt="House image">
+        </div>
+
+    </div>
+
+    <div class="details-bottom-container">
+        <div [ngStyle]="item.images[1] ? {'top': '-600px'} : {'top': '-500px'}" style="gap: 8px; position: relative;"
+            class="details-left-price">
+            <div style="display: flex; gap: 10px; direction: rtl;">
+                <p class="condition-tag">{{item.itemCondition}}</p>
+                <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
+
+            </div>
+
+            <span class="yad2-name">{{item.itemName}}</span>
+            <span class="price" style="font-weight: 500;">₪ {{item.itemPrice|number}}</span>
+            <hr class="divider">
+            <div class="cta">
+                <button *ngIf="!showPhoneNumber" class="btn-primary yad2" (click)="showPhoneNumber = true">הצגת מספר
+                    טלפון</button>
+                <div class="phoneNumber yad2" *ngIf="showPhoneNumber">{{formatTenDigits(item.ownerPhoneNumber)}}</div>
+                <button class="btn-secondary yad2">שליחת הודעה <svg width="1.5em" height="1.5em" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg" class="seller-chat-button_icon__U1caL">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8.81 17.093V19.95a.02.02 0 00.036.012l.01-.012.931-1.134.524-.637 1.389-1.692a1 1 0 01.773-.365h3.018a4 4 0 004-4V8.956a4 4 0 00-4-4H7.956a4 4 0 00-4 4v3.282a3.884 3.884 0 003.884 3.884.97.97 0 01.97.97zm6.68-13.637H7.957a5.5 5.5 0 00-5.5 5.5v3.282a5.384 5.384 0 004.855 5.358v2.354c0 1.427 1.789 2.067 2.694.964l2.704-3.292h2.782a5.5 5.5 0 005.5-5.5V8.956a5.5 5.5 0 00-5.5-5.5zM6.605 9.093a.75.75 0 01.75-.75h7.865a.75.75 0 010 1.5H7.354a.75.75 0 01-.75-.75zm0 3.277a.75.75 0 01.75-.75h4.806a.75.75 0 010 1.5H7.354a.75.75 0 01-.75-.75z"
+                            fill="currentColor"></path>
+                    </svg></button>
+            </div>
+        </div>
+        <div class="details-right-info ">
+            <div class="title">על המוצר</div>
+            <div class="description">{{item.itemDescription}}</div>
+            <hr class="divider">
+            <span class="more-details">פרטים נוספים</span>
+            <div class="listing-meta yad2">
+                <div class="meta-label">מצב המוצר</div>
+                <div class="meta-value">{{item.itemCondition}}</div>
+                <div class="meta-label">קטגוריה</div>
+                <div class="meta-value">{{item.itemType}}</div>
+                <div class="meta-label">מיקום מכירה </div>
+                <div class="meta-value">{{item.itemAddress}}</div>
+                <div class="meta-label">איש קשר</div>
+                <div class="meta-value">{{item.ownerName}}</div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

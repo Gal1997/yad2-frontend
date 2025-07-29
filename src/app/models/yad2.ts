@@ -8,6 +8,8 @@ export default interface Yad2 {
     itemName: string;
     itemPrice: number;
     itemType: string;
+    itemAddress: string;
+    itemExtraInfoBadge: string;
     images: string[];
 
 }

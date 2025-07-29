@@ -52,6 +52,14 @@
             </p-carousel>
         </div>
 
+        <div>
+            <p class="category_title">יד 2</p>
+            <p-carousel [value]="allYad2" [numVisible]="4" [numScroll]="2" [circular]="true">
+                <ng-template pTemplate="item" let-yad2>
+                    <app-card [item]="yad2" />
+                </ng-template>
+            </p-carousel>
+        </div>
     </div>
 
 </div>

@@ -1,13 +1,12 @@
-// details.component.scss
-
 .details-container {
     padding: 16px;
     display: flex;
     flex-direction: column;
     width: 1200px;
     justify-self: center;
+    // background-color: red;
 
-    // ── Top: thumbnails + main image/video ────────────────────────────
+
     .details-images {
         display: grid;
         grid-template-columns: 360px 1fr;
@@ -47,6 +46,7 @@
                 width: 100%;
                 height: 450px;
                 border-radius: 3px 6px 6px 3px;
+
             }
 
             transition: transform 0.2s;
@@ -59,7 +59,6 @@
         }
     }
 
-    // ── Bottom: price & CTA on left, info on right ────────────────────
     .details-bottom-container {
         display: flex;
         margin-top: 24px;
@@ -77,7 +76,7 @@
 
             .price {
                 font-size: 32px;
-                font-weight: bold;
+                font-weight: 500;
                 opacity: 0.85;
                 margin-bottom: 10px;
             }
@@ -99,16 +98,34 @@
                     margin-bottom: 25px;
                 }
 
+                .btn-primary.yad2 {
+                    background-color: #ff7404;
+                }
+
                 .btn-secondary {
                     margin-top: 8px;
                     width: 100%;
                     color: #10ad6f;
-                    font-weight: bold;
+                    font-weight: 550;
                     padding: 12px;
                     border: 1px solid #10ad6f;
                     border-radius: 452px;
                     background: transparent;
+                    font-size: 16px;
                     cursor: pointer;
+                }
+
+                .btn-secondary.yad2 {
+                    gap: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #f7faff;
+                    font-weight: 500;
+                    color: #1a73e8;
+                    border: 1px solid #1a73e8;
+                    padding: 12px 24px;
+                    transition: background-color 0.2s ease;
                 }
             }
         }
@@ -171,10 +188,15 @@
     justify-self: center;
     margin-bottom: 30px;
     font-size: 26px;
-    border: 1px solid rgba(0, 116, 10, 0.5);
-    border-radius: 5px;
-    padding: 5px;
-    width: fit-content;
+    border: 1.5px solid rgb(7, 184, 4);
+    border-radius: 25px;
+    padding: 8px 62px;
+    opacity: 0.9;
+    width: max-content;
+}
+
+.phoneNumber.yad2 {
+    border: 1.5px solid rgba(255, 170, 0, 1);
 }
 
 .divider {
@@ -188,7 +210,7 @@
     opacity: 0.8;
 }
 
-/* listing-meta.component.scss */
+
 .listing-meta {
     display: grid;
     grid-template-columns: repeat(4, 160px);
@@ -197,6 +219,10 @@
     row-gap: 15px;
     text-align: right;
     padding: 16px 0;
+}
+
+.listing-meta.yad2 {
+    grid-template-columns: repeat(2, 160px);
 }
 
 .meta-label {
@@ -220,4 +246,45 @@
         width: 1.3em;
         height: 1.3em;
     }
+}
+
+.condition-tag {
+    background-color: antiquewhite;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.yad2-name {
+    font-size: 20px;
+}
+
+.yad2-main-image-container {
+    display: flex;
+    justify-content: end;
+}
+
+.yad2-main-image {
+    height: 500px;
+    max-width: 700px;
+    border-radius: 5px;
+}
+
+.yad2-secondary-image-container {
+    display: flex;
+    direction: rtl;
+    margin-top: 20px;
+    gap: 20px;
+
+}
+
+.yad2-secondary-image {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 3px;
 }
