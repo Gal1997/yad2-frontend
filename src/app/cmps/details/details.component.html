@@ -160,20 +160,23 @@
 </div>
 
 <div *ngIf="isYad2(item)" class="details-container">
-    <div>
-        <div class="yad2-main-image-container">
-            <img class="yad2-main-image" src={{item.images[0]}} alt="Random image">
-        </div>
-        <div class="yad2-secondary-image-container">
-            <img *ngIf="item.images[2]" class="yad2-secondary-image" [src]="item.images[2]" alt="House image">
-            <img *ngIf="item.images[1]" class="yad2-secondary-image" [src]="item.images[1]" alt="House image">
-        </div>
+    <div class="yad2-top-container">
+        <div class="yad2-images-containner">
+            <div class="yad2-main-image-container">
+                <img class="yad2-main-image" src={{item.images[0]}} alt="Random image">
+            </div>
+            <div class="yad2-secondary-image-container">
+                <img class="yad2-secondary-image" [src]="item.images[2]" alt="House image"
+                    onerror="this.onerror=null;this.src='https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png';" />
 
-    </div>
 
-    <div class="details-bottom-container">
-        <div [ngStyle]="item.images[1] ? {'top': '-600px'} : {'top': '-500px'}" style="gap: 8px; position: relative;"
-            class="details-left-price">
+                <img class="yad2-secondary-image" [src]="item.images[1]" alt="House image"
+                    onerror="this.onerror=null;this.src='https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png';" />
+
+
+            </div>
+        </div>
+        <div class="details-left-price yad2">
             <div style="display: flex; gap: 10px; direction: rtl;">
                 <p class="condition-tag">{{item.itemCondition}}</p>
                 <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
@@ -195,6 +198,10 @@
                     </svg></button>
             </div>
         </div>
+    </div>
+
+    <div class="details-bottom-container">
+
         <div class="details-right-info ">
             <div class="title">על המוצר</div>
             <div class="description">{{item.itemDescription}}</div>

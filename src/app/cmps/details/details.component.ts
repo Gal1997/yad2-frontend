@@ -20,6 +20,7 @@ export class DetailsComponent implements OnInit {
   type!: 'house' | 'vehicle' | 'yad2' | '';
   showPhoneNumber = false;
 
+
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private houseService = inject(HouseService);

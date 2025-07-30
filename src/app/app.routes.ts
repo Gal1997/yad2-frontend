@@ -9,6 +9,7 @@ import { NadlanFormComponent } from './cmps/publish-cmps/nadlan-form/nadlan-form
 import { authGuard } from './guards/auth.guard';
 import { VehicleFormComponent } from './cmps/publish-cmps/vehicle-form/vehicle-form.component';
 import { Yad2FormComponent } from './cmps/publish-cmps/yad2-form/yad2-form.component';
+import { NadlanPageComponent } from './pages/nadlan-page/nadlan-page.component';
 
 export const routes: Routes = [
     { path: 'home', component: LandingPageComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'details/:id', component: DetailsComponent },
+    { path: 'realestate', component: NadlanPageComponent },
     {
         path: 'publish',
         component: PublishPageComponent,
