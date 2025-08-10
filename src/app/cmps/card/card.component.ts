@@ -18,8 +18,14 @@ export class CardComponent {
 
   private router = inject(Router)
 
+  @Input() layout: 'vertical' | 'horizontal' = 'vertical'; // default is vertical
   @Input() item!: CardItem;
+  fallbackImage = 'https://workingat.vu.nl/static/images/placeholder-image.jpg';
 
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.fallbackImage;
+  }
 
   onCardClick(item: CardItem) {
     const type = this.getItemType();
@@ -47,6 +53,8 @@ export class CardComponent {
       return 'house'
     if (this.isYad2(this.item))
       return 'yad2'
+    console.log("!!!");
+
     return ""
   }
 

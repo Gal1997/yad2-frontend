@@ -1,6 +1,6 @@
 <div class="app-main-conntainer">
-  <app-header *ngIf="!isAuthPage()" />
-  <div>
+  <app-header *ngIf="renderHeader()" />
+  <div [ngStyle]="renderHeader() ? {'margin-top': '65px'} : {}">
     <router-outlet /> <!-- This will be replaced with something dynamic!!-->
   </div>
   <app-footer class="footer" />

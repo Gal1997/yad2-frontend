@@ -16,11 +16,6 @@ export class AppHeaderComponent {
   private userService = inject(UserService);
   loggedInUser$ = this.userService.loggedInUser$;
 
-
-  onLogin() {
-    this.router.navigate(['/login'])
-  }
-
   onLogout() {
     this.userService.logout().subscribe(() => {
       this.router.navigate(['/']);

@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'gal-yad2';
   private router = inject(Router)
 
-  isAuthPage(): boolean {
-    return this.router.url === '/login' || this.router.url === '/signup';
+  renderHeader(): boolean {
+    return this.router.url !== '/login' && this.router.url !== '/signup';
   }
 }

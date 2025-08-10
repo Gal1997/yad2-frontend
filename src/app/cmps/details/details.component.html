@@ -7,7 +7,7 @@
                 alt="House image">
         </div>
         <div class="main-media">
-            <img src={{item.images[0]}} alt="Random image">
+            <img [src]="item.images[0] || fallbackImage" alt="Random image" (error)="onImageError($event)">
         </div>
     </div>
 
@@ -80,7 +80,8 @@
                 alt="House image">
         </div>
         <div class="main-media">
-            <img src={{item.images[0]}} alt="Random image">
+            <img [src]="item.images[0] || fallbackImage" alt="Random image" (error)="onImageError($event)">
+
         </div>
     </div>
 
@@ -163,7 +164,9 @@
     <div class="yad2-top-container">
         <div class="yad2-images-containner">
             <div class="yad2-main-image-container">
-                <img class="yad2-main-image" src={{item.images[0]}} alt="Random image">
+                <img class="yad2-main-image" [src]="item.images[0] || fallbackImage" alt="Random image"
+                    (error)="onImageError($event)">
+
             </div>
             <div class="yad2-secondary-image-container">
                 <img class="yad2-secondary-image" [src]="item.images[2]" alt="House image"

@@ -25,6 +25,13 @@ export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private houseService = inject(HouseService);
   private vehicleService = inject(VehicleService);
+  fallbackImage = 'https://workingat.vu.nl/static/images/placeholder-image.jpg';
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.fallbackImage;
+  }
+
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

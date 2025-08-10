@@ -1,9 +1,20 @@
+:host {
+    cursor: pointer;
+}
+
 .item-info {
     direction: rtl;
     padding: 8px;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    position: relative;
+    width: 100%;
+
+    &.vertical {
+        justify-content: space-evenly;
+        gap: 0px;
+    }
 
 }
 
@@ -18,6 +29,12 @@
     border-top-right-radius: 8px;
     width: 280px;
     height: 150px;
+
+    &.vertical {
+        scale: 0.85;
+        width: 260px;
+        border-radius: 6px;
+    }
 }
 
 .yad2-item-image {
@@ -34,6 +51,20 @@
     margin-bottom: 2px;
     margin-right: 14px;
     border-radius: 8px;
+    transition: box-shadow 0.4s, transform 0.4s;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        transition: box-shadow 0.4s, transform 0.4s;
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    &.vertical {
+        display: flex;
+        margin-bottom: 15px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+
+    }
 }
 
 .yad2-item {
@@ -46,12 +77,20 @@
 .info1 {
     font-weight: 500;
     opacity: 0.87;
+
+    &.vertical {
+        font-size: 18px;
+    }
 }
 
 .info2,
 .info3 {
     font-size: 15px;
     opacity: 0.8;
+
+    &.vertical {
+        font-size: 16px;
+    }
 }
 
 .condition-tag {
@@ -63,4 +102,14 @@
     margin-top: 5px;
     font-weight: 500;
     opacity: 0.8;
+}
+
+
+.price {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
 }

@@ -17,23 +17,21 @@ export class LoginPageComponent {
   private router = inject(Router);
   loginError: boolean = false;
 
-
-
-
   constructor(private fb: FormBuilder) {
+    const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+    if (navEntry?.type !== 'reload') {
+      location.reload();
+    }
+
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
 
-    // If login credentials are invalid, don't show the loginError (incorrect details) error
     this.loginForm.statusChanges.subscribe(status => {
-      if (status === 'INVALID') {
-        this.loginError = false;
-      }
+      if (status === 'INVALID') this.loginError = false;
     });
-
-
   }
 
   togglePasswordVisibility() {
@@ -46,18 +44,13 @@ export class LoginPageComponent {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
       };
-      console.log("User entered ", credentials);
 
       this.userService.login(credentials).subscribe({
         next: (response) => {
-          // successful login
-          console.log('Login successful', response);
           this.router.navigate(['/home']);
           this.loginError = false;
         },
-        error: (error) => {
-          // Handle error
-          console.error('Login failed', error.error);
+        error: () => {
           this.loginError = true;
         }
       });
@@ -67,6 +60,8 @@ export class LoginPageComponent {
   }
 
 
-
 }
+
+
+
 

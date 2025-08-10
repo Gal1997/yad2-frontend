@@ -1,44 +1,102 @@
-<!-- Vehicle Card -->
-<div *ngIf="isVehicle(item)" class="product-item" (click)="onCardClick(item)">
-    <div class="image-wrapper">
-        <img class="item-image" [src]="item.images[0]" alt="Image Unavailable" />
+<!-- Vertical Card -->
+<div *ngIf="layout === 'vertical'">
+    <!-- Vehicle Vertical Card -->
+    <div *ngIf="isVehicle(item)" class="product-item" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="item-image" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
+        </div>
+        <div class="item-info">
+            <div class="info1">{{ item.price | number }} ₪</div>
+            <div class="info2">{{ item.manufacturer }} {{ item.degem }}</div>
+            <div class="info3">{{ item.year }}</div>
+        </div>
     </div>
-    <div class="item-info">
-        <div class="info1">{{ item.price | number }} ₪</div>
-        <div class="info2">{{ item.manufacturer }} {{ item.degem }}</div>
-        <div class="info3">{{ item.year }}</div>
+
+    <!-- House Vertical Card -->
+    <div *ngIf="isHouse(item)" class="product-item" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="item-image" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
+        </div>
+        <div class="item-info">
+            <div class="info1">{{ item.price | number }} ₪</div>
+            <div class="info2">{{ item.street }} {{ item.number }}, {{ item.city }}</div>
+            <div class="info3">{{ item.rooms }} חדרים</div>
+        </div>
+    </div>
+
+    <!-- Yad2 Vertical Card -->
+    <div *ngIf="isYad2(item)" class="yad2-item" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="yad2-item-image" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
+
+        </div>
+        <div class="item-info">
+            <div style="display: flex;justify-content: space-between;">
+                <div class="info1">₪{{ item.itemPrice | number }}</div>
+                <div class="yad2-address">{{ item.itemAddress.split(',')[1]?.trim() }}</div>
+            </div>
+
+            <div class="info2">{{ item.itemName }}</div>
+            <div style="display: flex; gap: 10px;">
+                <p class="condition-tag">{{item.itemCondition}}</p>
+                <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
+            </div>
+
+        </div>
     </div>
 </div>
-
-<!-- House Card -->
-<div *ngIf="isHouse(item)" class="product-item" (click)="onCardClick(item)">
-    <div class="image-wrapper">
-        <img class="item-image" [src]="item.images[0]" alt="Image Unavailable" />
-    </div>
-    <div class="item-info">
-        <div class="info1">{{ item.price | number }} ₪</div>
-        <div class="info2">{{ item.street }} {{ item.number }}, {{ item.city }}</div>
-        <div class="info3">{{ item.rooms }} חדרים</div>
-    </div>
-</div>
-
-<!-- Yad2 Card -->
-<div *ngIf="isYad2(item)" class="yad2-item" (click)="onCardClick(item)">
-    <div class="image-wrapper">
-        <img class="yad2-item-image" [src]="item.images[0]" alt="Image Unavailable" />
-    </div>
-    <div class="item-info">
-        <div style="display: flex;justify-content: space-between;">
-            <div class="info1">₪{{ item.itemPrice | number }}</div>
-            <div class="yad2-address">{{ item.itemAddress.split(',')[1]?.trim() }}</div>
+<!-- Horizontal Card -->
+<div *ngIf="layout === 'horizontal'" (click)="onCardClick(item)">
+    <!-- Vehicle Vertical Card -->
+    <div *ngIf="isVehicle(item)" class="product-item" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="item-image" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
         </div>
-
-        <div class="info2">{{ item.itemName }}</div>
-        <div style="display: flex; gap: 10px;">
-            <p class="condition-tag">{{item.itemCondition}}</p>
-            <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
+        <div class="item-info">
+            <div class="info1">{{ item.price | number }} ₪</div>
+            <div class="info2">{{ item.manufacturer }} {{ item.degem }}</div>
+            <div class="info3">{{ item.year }}</div>
         </div>
+    </div>
 
-        <!-- <div class="info3">{{ item.rooms }} חדרים</div> -->
+    <!-- House Vertical Card -->
+    <div *ngIf="isHouse(item)" class="product-item vertical" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="item-image vertical" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
+        </div>
+        <div class="item-info vertical">
+            <div class="info1 vertical">{{ item.street }} {{ item.number }}</div>
+            <div class="info2 vertical">{{item.type}} , {{item.city}}</div>
+            <div class="info3 vertical">{{ item.rooms }} חדרים • קומה {{item.floor}} • {{item.size}} מ"ר </div>
+            <div class="price">{{ item.price | number }} ₪</div>
+            <!-- <div class="info1 vertical">{{ item.price | number }} ₪</div> -->
+        </div>
+    </div>
+
+    <!-- Yad2 Vertical Card -->
+    <div *ngIf="isYad2(item)" class="yad2-item" (click)="onCardClick(item)">
+        <div class="image-wrapper">
+            <img class="yad2-item-image" [src]="item.images[0] || fallbackImage" alt="Image Unavailable"
+                (error)="onImageError($event)" />
+
+        </div>
+        <div class="item-info">
+            <div style="display: flex;justify-content: space-between;">
+                <div class="info1">₪{{ item.itemPrice | number }}</div>
+                <div class="yad2-address">{{ item.itemAddress.split(',')[1]?.trim() }}</div>
+            </div>
+
+            <div class="info2">{{ item.itemName }}</div>
+            <div style="display: flex; gap: 10px;">
+                <p class="condition-tag">{{item.itemCondition}}</p>
+                <p class="condition-tag">{{item.itemExtraInfoBadge}}</p>
+            </div>
+
+        </div>
     </div>
 </div>

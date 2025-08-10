@@ -48,7 +48,9 @@
             </div>
         </ng-template>
         <mat-menu class="mat-menu-panel" #menu2="matMenu">
-            <button class="mat-menu-item" mat-menu-item (click)="onLogin()">התחבר</button>
+            <a routerLink="/login">
+                <button class="mat-menu-item" mat-menu-item>התחבר</button>
+            </a>
         </mat-menu>
 
         <a routerLink="/publish" style="all: unset">

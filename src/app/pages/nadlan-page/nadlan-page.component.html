@@ -1,1 +1,14 @@
-<p>nadlan-page works!</p>
+<div class="nadlanPage-main-container">
+    <div class="right-side">
+        <p class="title">נדל"ן למכירה</p>
+        <div>
+            <ng-container *ngFor="let house of allHouses">
+                <app-card [item]="house" layout="horizontal"></app-card>
+            </ng-container>
+        </div>
+    </div>
+    <div class="left-side-map">
+        <app-map *ngIf="places.length" [places]="places"></app-map>
+
+    </div>
+</div>
