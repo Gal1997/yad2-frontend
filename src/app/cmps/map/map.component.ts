@@ -1,31 +1,34 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 
 @Component({
   selector: 'app-map',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div *ngIf="isLoading" class="loading-overlay">
-      <div class="spinner"></div>
-    </div>
-    <div id="map" class="map-container" [class.map-blur]="isLoading"></div>
-  `,
+  templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
 
-  constructor(private http: HttpClient) { }
-  isLoading: boolean = false;
+  constructor(private http: HttpClient) {
+    this.loadCache();
+    console.log('Cache loaded in constructor:', this.geocodeCache);
+  }
+
+
+  isLoading = false;
   private map!: L.Map;
   private markersLayer = L.layerGroup();
 
   @Input() places: { city: string; street: string }[] = [];
   coordinates: { lat: number; lon: number }[] = [];
-  BASE_URL = 'http://localhost:3000'
+  BASE_URL = 'http://localhost:3000';
+
+  // Persistent cache
+  private geocodeCache = new Map<string, { lat: number; lon: number }>();
 
   ngAfterViewInit(): void {
     this.map = L.map('map', {
@@ -36,7 +39,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 12,
+      maxZoom: 14,
       minZoom: 8
     }).addTo(this.map);
 
@@ -49,11 +52,25 @@ export class MapComponent implements AfterViewInit, OnChanges {
       this.coordinates = [];
       this.markersLayer.clearLayers();
 
-      const requests = this.places.map(place =>
-        this.http.get<any[]>(`${this.BASE_URL}/geocode`, {
-          params: { address: `${place.street}, ${place.city}` }
-        })
-      );
+      const requests = this.places.map(place => {
+        const key = `${place.street}, ${place.city}`.toLowerCase().trim();
+
+        if (this.geocodeCache.has(key)) {
+          console.log("yeah");
+
+          // Use cached result
+          return of([this.geocodeCache.get(key)]);
+        }
+
+        console.log('nah'
+        );
+
+
+        // Fetch from API
+        return this.http.get<any[]>(`${this.BASE_URL}/geocode`, {
+          params: { address: key }
+        });
+      });
 
       forkJoin(requests).subscribe({
         next: resultsArray => {
@@ -61,9 +78,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
             if (results.length > 0) {
               const { lat, lon } = results[0];
               const coord = { lat: +lat, lon: +lon };
-              this.coordinates.push(coord);
 
-              const place = this.places[index];
+              const key = `${this.places[index].street}, ${this.places[index].city}`.toLowerCase().trim();
+
+              // Save to cache and persist
+              this.geocodeCache.set(key, coord);
+              this.saveCache();
+
+              this.coordinates.push(coord);
 
               const marker = L.circleMarker([coord.lat, coord.lon], {
                 radius: 6,
@@ -75,7 +97,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
               marker
                 .addTo(this.markersLayer)
-                .bindPopup(`<div>${place.street}, ${place.city}</div>`)
+                .bindPopup(`<div>${this.places[index].street}, ${this.places[index].city}</div>`)
                 .on('mouseover', () => {
                   marker.openPopup();
                   marker.setRadius(8);
@@ -83,14 +105,16 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 .on('mouseout', () => {
                   marker.closePopup();
                   marker.setRadius(6);
-                });
+                })
+
             }
           });
 
-          if (this.coordinates.length > 0) {
+          if (this.coordinates.length > 0 && this.map) {
             const latLngs = this.coordinates.map(c => [c.lat, c.lon] as [number, number]);
             this.map.fitBounds(latLngs);
           }
+
           this.isLoading = false;
         },
         error: err => {
@@ -99,5 +123,24 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
       });
     }
+  }
+
+  private loadCache() {
+    const cacheData = localStorage.getItem('geocodeCache');
+    if (cacheData) {
+      try {
+        const parsed = JSON.parse(cacheData);
+        this.geocodeCache = new Map<string, { lat: number; lon: number }>(parsed);
+        console.log("NAA", this.geocodeCache);
+
+      } catch (e) {
+        console.error('Failed to parse geocode cache', e);
+      }
+    }
+  }
+
+  private saveCache() {
+    const arr = Array.from(this.geocodeCache.entries());
+    localStorage.setItem('geocodeCache', JSON.stringify(arr));
   }
 }

@@ -1,1 +1,4 @@
-<p>map works!</p>
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+</div>
+<div id="map" class="map-container" [class.map-blur]="isLoading"></div>
