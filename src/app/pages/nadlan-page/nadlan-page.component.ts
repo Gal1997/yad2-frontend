@@ -21,7 +21,7 @@ export class NadlanPageComponent implements OnInit {
 
   private houseService = inject(HouseService)
   allHouses: House[] = [];
-  places: { city: string, street: string }[] = [];
+  places: { city: string, street: string, number: number }[] = [];
 
 
 
@@ -31,7 +31,8 @@ export class NadlanPageComponent implements OnInit {
         this.allHouses = data;
         this.places = this.allHouses.map(house => ({
           city: house.city,
-          street: house.street
+          street: house.street,
+          number: house.number
         }));
 
       },

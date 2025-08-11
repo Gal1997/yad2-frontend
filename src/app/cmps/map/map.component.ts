@@ -23,7 +23,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   private map!: L.Map;
   private markersLayer = L.layerGroup();
 
-  @Input() places: { city: string; street: string }[] = [];
+  @Input() places: { city: string; street: string, number: number }[] = [];
   coordinates: { lat: number; lon: number }[] = [];
   BASE_URL = 'http://localhost:3000';
 
@@ -53,17 +53,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
       this.markersLayer.clearLayers();
 
       const requests = this.places.map(place => {
-        const key = `${place.street}, ${place.city}`.toLowerCase().trim();
-
+        const key = `${place.street} ${place.number}, ${place.city}`.trim();
         if (this.geocodeCache.has(key)) {
-          console.log("yeah");
+
 
           // Use cached result
           return of([this.geocodeCache.get(key)]);
         }
 
-        console.log('nah'
-        );
 
 
         // Fetch from API
@@ -79,7 +76,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
               const { lat, lon } = results[0];
               const coord = { lat: +lat, lon: +lon };
 
-              const key = `${this.places[index].street}, ${this.places[index].city}`.toLowerCase().trim();
+              const key = `${this.places[index].street} ${this.places[index].number}, ${this.places[index].city}`.trim();
 
               // Save to cache and persist
               this.geocodeCache.set(key, coord);
@@ -97,7 +94,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
               marker
                 .addTo(this.markersLayer)
-                .bindPopup(`<div>${this.places[index].street}, ${this.places[index].city}</div>`)
+                .bindPopup(`<div>${this.places[index].street} ${this.places[index].number}, ${this.places[index].city}</div>`)
                 .on('mouseover', () => {
                   marker.openPopup();
                   marker.setRadius(8);
@@ -106,6 +103,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
                   marker.closePopup();
                   marker.setRadius(6);
                 })
+
 
             }
           });

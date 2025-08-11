@@ -168,15 +168,12 @@
                     (error)="onImageError($event)">
 
             </div>
-            <div class="yad2-secondary-image-container">
+            <div *ngIf="item.images[1] || item.images[2]" class="yad2-secondary-image-container">
                 <img class="yad2-secondary-image" [src]="item.images[2]" alt="House image"
                     onerror="this.onerror=null;this.src='https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png';" />
 
-
                 <img class="yad2-secondary-image" [src]="item.images[1]" alt="House image"
                     onerror="this.onerror=null;this.src='https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png';" />
-
-
             </div>
         </div>
         <div class="details-left-price yad2">
