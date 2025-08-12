@@ -26,7 +26,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   @Input() places: { city: string; street: string, number: number }[] = [];
   coordinates: { lat: number; lon: number }[] = [];
-  BASE_URL = environment.production ? '/' : 'http://localhost:3000';
+  BASE_URL = environment.production ? '' : 'http://localhost:3000';
 
 
   // Persistent cache
