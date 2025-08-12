@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -25,7 +26,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   @Input() places: { city: string; street: string, number: number }[] = [];
   coordinates: { lat: number; lon: number }[] = [];
-  BASE_URL = 'http://localhost:3000';
+  BASE_URL = environment.production ? '/' : 'http://localhost:3000';
+
 
   // Persistent cache
   private geocodeCache = new Map<string, { lat: number; lon: number }>();

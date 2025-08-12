@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 //import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser';
 
@@ -11,6 +12,8 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser';
 //     ? '/api/'
 //     : '//localhost:3030/api/';
 const BASE_URL = '//localhost:3000/api/'
+const apiUrl = environment.production ? '/api/' : '//localhost:3000/api/';
+
 const BASE_USER_URL = BASE_URL + 'user/';
 const BASE_AUTH_URL = BASE_URL + 'auth/';
 

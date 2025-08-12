@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Yad2 from '../models/yad2';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class Yad2Service {
 
-  private apiUrl = 'http://localhost:3000/api/yad2';
+
+  private apiUrl = environment.production ? '/api/yad2' : 'http://localhost:3000/api/yad2';
+
 
   constructor(private http: HttpClient) { }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import Vehicle from '../models/vehicle';
+import { environment } from '../../environments/environment';
 
 interface GovIlResponse {
     result: { records: any[] };
@@ -11,7 +12,8 @@ interface GovIlResponse {
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
     private readonly govAPI = 'https://data.gov.il/api/3/action/datastore_search';
-    private apiUrl = 'http://localhost:3000/api/vehicle';
+    private apiUrl = environment.production ? '/api/vehicle' : 'http://localhost:3000/api/vehicle';
+
 
     constructor(private http: HttpClient) { }
 

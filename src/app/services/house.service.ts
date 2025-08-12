@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import House from '../models/house';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class HouseService {
-  private apiUrl = 'http://localhost:3000/api/house';
+
+  private apiUrl = environment.production ? '/api/house' : 'http://localhost:3000/api/house';
 
   constructor(private http: HttpClient) { }
 
